@@ -1,28 +1,17 @@
 from flask import Flask, Response
-import requests
-import os
+from flask_login import LoginManager
+from library import register_view
+
 
 # Defining flask application
 app = Flask(__name__)
-
-
-def update_status():
-    global port, hostname
-    lb_ip_addr = os.environ['LB_IP_ADDR']
-    lb_port = os.environ['LB_PORT']
-    url = f"http://{lb_ip_addr}:{lb_port}/port_update/{hostname}/{port}"
-    response = requests.get(url)
-    return response.status_code
-
-
-@app.route("/home_page_old")
-def home_page_old():
-    # aggiorno load balancer quando ho finito
-    status_code = int(update_status())
-    if status_code != 200:
-        return 405, f'Failed to update port status :{status_code}'
-    return Response(response="Old Home Page", status=200)
-
+# Defining securities constraint
+app.config['SECRET_KEY'] = "TestAppKey"
+# Login manager defined -> cookies based system
+login_manager = LoginManager()
+login_manager.init_app(app)
+# Register all implemented view to the application
+register_view(app)
 
 @app.route("/home_page")
 def home_page():

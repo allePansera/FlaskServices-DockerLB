@@ -1,0 +1,26 @@
+{
+  "user_list": [
+    {
+      "username": "Alessandro Pansera",
+      "password": "AP01",
+      "id": "AP__0001",
+      "role": "A"
+    },
+    {
+      "username": "Mattia Bertacchini",
+      "password": "MB01",
+      "id": "MB__0001",
+      "role": "G"
+    }
+  ],
+  "roles": [
+    {
+      "description": "Guest",
+      "code": "G"
+    },
+    {
+      "description": "Admin",
+      "code": "A"
+    }
+  ]
+}
