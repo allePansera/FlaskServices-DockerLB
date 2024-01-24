@@ -4,8 +4,8 @@ services:
   app:
   # Location of the Flask Application dockerfile
     build:
-      context: app
-      dockerfile: app/backend/Dockerfile
+      context: app/backend
+      dockerfile: Dockerfile
     ports:
       # Flask application Host port: Flask Container port
       - '5000'
@@ -17,7 +17,7 @@ services:
     image: nginx:latest
     volumes:
     # Volume for the nginx Docker container
-      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ../nginx/nginx.conf:/etc/nginx/nginx.conf:ro
     # The nginx service depends on the Flask application service (It will link the Flask web application and Nginx Load balancer)
     depends_on:
       - app
