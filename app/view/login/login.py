@@ -1,45 +1,98 @@
-from flask_classful import FlaskView, route
+from flask_classful import FlaskView
+from flask_classful import route
 from flask import redirect
-from app.view.login.user import User
+from flask import session
+from flask import request
+from flask import jsonify
+from flask_login import current_user
+from datetime import timedelta
 from app.app import login_manager
 from app.app import app
+from app.app import SESSION_EXPRIANCE_MIN
+from app.view.login.user_manager import UserManager
 import flask_login
 
 
+LOGIN_SUCCESSFULLY = "Login attempted correctly"
+LOGIN_FAILED = "Login failed"
+LOGOUT_SUCCESSFULLY = "Logout attempted correctly"
+LOGOUT_FAILED = "Logout failed"
+
 
 @login_manager.user_loader
-def load_user(idutenti):
-    """Il metodo serve per creare l'oggetto User necessario per la creazione della sessione di autenticazione"""
-    # 1. Scarico i dati dell'utente
-    # 2. Create un oggetto con i dati dell'utente
+def load_user(ut____id):
+    """
+    Func. used to load per request user infos receiving its id
+    :param ut____id: user unique id
+    :return: User istance if found otherwise not
+    """
 
-    check, output = userManager.caricaUtente(idutenti)
+    user_manager = UserManager()
+    check, output = user_manager.get_user_by_id(ut____id)
     if check:
-        return User(idutenti=output[0], utdescri=output[1], utavatar=output[2], utospite=output[3])
+        user_instance = output
+        return user_instance
     else:
         return None
 
+
 @app.before_request
 def make_session_permanent():
+    """By default, each session lasts an amount of min decided inside app.py script"""
     session.permanent = True
-    app.permanent_session_lifetime = timedelta(minutes=360)
+    app.permanent_session_lifetime = timedelta(minutes=SESSION_EXPRIANCE_MIN)
+
 
 @login_manager.unauthorized_handler
 def unauthorized_callback():
-    """Il metodo definisce il comportamento in caso di tentato accesso senza login"""
-    return redirect('/loginPage')
+    """Redirects for unsupported request due to lack of permission"""
+    return redirect('/login/logout')
+
 
 @app.errorhandler(500)
 def internal_error(error):
-    """Il metodo definisce il comportamento da adottare in caso di errore con codice 500"""
+    """Redirects to page containing 500 error description"""
+    # TODO: Create error page
     return redirect('/login/logout')
 
 
 class LoginView(FlaskView):
-    #METODI ACCETTATI PER LA RICHIESTA
-    default_methods = ['POST']
 
-    @route('/request', methods=default_methods)
-    @flask_login.login_required
+    @route('/request', methods=["POST"])
     def request(self):
-        pass
+        """
+        Check the login attempt considering the following expected variables:
+        :param ut____id: user attempted id
+        :param ut__pswd: user attempted passwd
+        :return: {"status": True, "msg": LOGIN_SUCCESSFULLY} or
+        {"status": False, "msg": LOGIN_FAILED}
+        """
+        try:
+            ut____id = request.form.get("ut____id", "")
+            ut__pswd = request.form.get("ut__pswd", "")
+            user_manager = UserManager()
+            check, output = user_manager.check(id=ut____id, password=ut__pswd)
+            if check:
+                user_instance = output
+                flask_login.login_user(user_instance)
+                return jsonify({"status": True, "msg": LOGIN_SUCCESSFULLY})
+            else:
+                return jsonify({"status": False, "msg": LOGIN_FAILED})
+        except Exception as e:
+            return jsonify({"status": False, "msg": str(e)})
+
+    @route('/logout', methods=["POST"])
+    def logout(self):
+        """
+        Execute logout of user given its id retrieved from current user cookies
+        :return: {"status": True, "msg": LOGOUT_SUCCESSFULLY} or
+        {"status": False, "msg": LOGOUT_FAILED}
+        """
+        try:
+            if current_user.is_authenticated:
+                flask_login.logout_user()
+                return jsonify({"status": True, "msg": LOGOUT_SUCCESSFULLY})
+            else:
+                return jsonify({"status": False, "msg": LOGOUT_FAILED})
+        except Exception as e:
+            return jsonify({"status": False, "msg": str(e)})
