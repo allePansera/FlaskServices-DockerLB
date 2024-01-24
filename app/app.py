@@ -15,11 +15,6 @@ register_view(app)
 # Session expirancy
 SESSION_EXPRIANCE_MIN = 360
 
-@app.route("/home_page")
-def home_page():
-    return Response(response="Home Page", status=200)
-
-
 
 if '__main__' == __name__:
     app.run(host="0.0.0.0", debug=True)
