@@ -4,6 +4,7 @@ from flask import redirect
 from flask import session
 from flask import request
 from flask import jsonify
+from flask.blueprints import Blueprint
 from flask_login import current_user
 from datetime import timedelta
 from app.backend.app import login_manager
@@ -18,6 +19,7 @@ LOGIN_FAILED = "Login failed"
 LOGOUT_SUCCESSFULLY = "Logout attempted correctly"
 LOGOUT_FAILED = "Logout failed"
 
+login = Blueprint('login', __name__, template_folder='templates', static_folder='static')
 
 @login_manager.user_loader
 def load_user(ut____id):
@@ -58,7 +60,7 @@ def internal_error(error):
 
 class LoginView(FlaskView):
 
-    @route('/request', methods=["POST"])
+    @login.route('/request', methods=["POST"])
     def request(self):
         """
         Check the login attempt considering the following expected variables:
@@ -81,7 +83,7 @@ class LoginView(FlaskView):
         except Exception as e:
             return jsonify({"status": False, "msg": str(e)})
 
-    @route('/logout', methods=["POST"])
+    @login.route('/logout', methods=["POST"])
     def logout(self):
         """
         Execute logout of user given its id retrieved from current user cookies
