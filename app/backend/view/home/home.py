@@ -1,4 +1,3 @@
-from flask_classful import FlaskView, route
 from flask.blueprints import Blueprint
 import flask_login
 

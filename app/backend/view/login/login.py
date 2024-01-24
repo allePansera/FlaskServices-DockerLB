@@ -1,5 +1,3 @@
-from flask_classful import FlaskView
-from flask_classful import route
 from flask import redirect
 from flask import session
 from flask import request
