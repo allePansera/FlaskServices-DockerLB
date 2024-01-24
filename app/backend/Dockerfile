@@ -10,4 +10,4 @@ COPY .. /app/backend
 RUN pip install requests
 RUN pip install -r config/requirements.txt
 # execute flask app
-CMD python app.py
+CMD python run.py

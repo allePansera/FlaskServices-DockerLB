@@ -5,10 +5,10 @@ from flask import jsonify
 from flask.blueprints import Blueprint
 from flask_login import current_user
 from datetime import timedelta
-from app.backend.app import login_manager
-from app.backend.app import app
-from app.backend.app import SESSION_EXPRIANCE_MIN
-from app.backend.view.login.user_manager import UserManager
+from app import login_manager
+from app import app
+from app import SESSION_EXPRIANCE_MIN
+from view.login.user_manager import UserManager
 import flask_login
 
 
@@ -27,7 +27,6 @@ def load_user(ut____id):
     :param ut____id: user unique id
     :return: User istance if found otherwise not
     """
-
     user_manager = UserManager()
     check, output = user_manager.get_user_by_id(ut____id)
     if check:
@@ -79,6 +78,7 @@ def request():
             return jsonify({"status": False, "msg": LOGIN_FAILED})
     except Exception as e:
         return jsonify({"status": False, "msg": str(e)})
+
 
 @login.route('/logout', methods=["POST"])
 def logout():
