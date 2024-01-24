@@ -21,6 +21,7 @@ LOGOUT_FAILED = "Logout failed"
 
 login = Blueprint('login', __name__, template_folder='templates', static_folder='static')
 
+
 @login_manager.user_loader
 def load_user(ut____id):
     """
@@ -58,43 +59,41 @@ def internal_error(error):
     return redirect('/login/logout')
 
 
-class LoginView(FlaskView):
+@login.route('/request', methods=["POST"])
+def request():
+    """
+    Check the login attempt considering the following expected variables:
+    :param ut____id: user attempted id
+    :param ut__pswd: user attempted passwd
+    :return: {"status": True, "msg": LOGIN_SUCCESSFULLY} or
+    {"status": False, "msg": LOGIN_FAILED}
+    """
+    try:
+        ut____id = request.form.get("ut____id", "")
+        ut__pswd = request.form.get("ut__pswd", "")
+        user_manager = UserManager()
+        check, output = user_manager.check(id=ut____id, password=ut__pswd)
+        if check:
+            user_instance = output
+            flask_login.login_user(user_instance)
+            return jsonify({"status": True, "msg": LOGIN_SUCCESSFULLY})
+        else:
+            return jsonify({"status": False, "msg": LOGIN_FAILED})
+    except Exception as e:
+        return jsonify({"status": False, "msg": str(e)})
 
-    @login.route('/request', methods=["POST"])
-    def request(self):
-        """
-        Check the login attempt considering the following expected variables:
-        :param ut____id: user attempted id
-        :param ut__pswd: user attempted passwd
-        :return: {"status": True, "msg": LOGIN_SUCCESSFULLY} or
-        {"status": False, "msg": LOGIN_FAILED}
-        """
-        try:
-            ut____id = request.form.get("ut____id", "")
-            ut__pswd = request.form.get("ut__pswd", "")
-            user_manager = UserManager()
-            check, output = user_manager.check(id=ut____id, password=ut__pswd)
-            if check:
-                user_instance = output
-                flask_login.login_user(user_instance)
-                return jsonify({"status": True, "msg": LOGIN_SUCCESSFULLY})
-            else:
-                return jsonify({"status": False, "msg": LOGIN_FAILED})
-        except Exception as e:
-            return jsonify({"status": False, "msg": str(e)})
-
-    @login.route('/logout', methods=["POST"])
-    def logout(self):
-        """
-        Execute logout of user given its id retrieved from current user cookies
-        :return: {"status": True, "msg": LOGOUT_SUCCESSFULLY} or
-        {"status": False, "msg": LOGOUT_FAILED}
-        """
-        try:
-            if current_user.is_authenticated:
-                flask_login.logout_user()
-                return jsonify({"status": True, "msg": LOGOUT_SUCCESSFULLY})
-            else:
-                return jsonify({"status": False, "msg": LOGOUT_FAILED})
-        except Exception as e:
-            return jsonify({"status": False, "msg": str(e)})
+@login.route('/logout', methods=["POST"])
+def logout():
+    """
+    Execute logout of user given its id retrieved from current user cookies
+    :return: {"status": True, "msg": LOGOUT_SUCCESSFULLY} or
+    {"status": False, "msg": LOGOUT_FAILED}
+    """
+    try:
+        if current_user.is_authenticated:
+            flask_login.logout_user()
+            return jsonify({"status": True, "msg": LOGOUT_SUCCESSFULLY})
+        else:
+            return jsonify({"status": False, "msg": LOGOUT_FAILED})
+    except Exception as e:
+        return jsonify({"status": False, "msg": str(e)})
