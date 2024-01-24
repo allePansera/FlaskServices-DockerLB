@@ -33,3 +33,12 @@
   Controllare com aggiungere all'interno del Dockerfile l'esecuzione di angular e del db
   https://levioconsulting.com/insights/how-to-dockerize-an-angular-application-with-nginx/
   <br>
+  https://medium.com/@RamkumarMrj/dockerizing-front-end-as-angular-and-back-end-as-flask-1e944a0ed77
+
+  Comandi Docker:
+  - Build flask with angular:
+  docker-compose up --build -d --scale app=3
+  - Build Angular Docker Image:<br>
+  docker build -t my_angular_app frontend/
+  - Run Angular Docker Container with HTTPS port mapped to 443:<br>
+  docker run -d - name angular_app -p 80:80 -p 443:443 my_angular_app

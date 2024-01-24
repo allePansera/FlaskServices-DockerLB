@@ -1,5 +1,5 @@
 import json
-from app.view.login.user import User
+from app.backend.view.login.user import User
 
 
 class UserManager:

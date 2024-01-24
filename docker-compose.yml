@@ -5,7 +5,7 @@ services:
   # Location of the Flask Application dockerfile
     build:
       context: app
-      dockerfile: Dockerfile
+      dockerfile: app/backend/Dockerfile
     ports:
       # Flask application Host port: Flask Container port
       - '5000'

@@ -6,10 +6,10 @@ from flask import request
 from flask import jsonify
 from flask_login import current_user
 from datetime import timedelta
-from app.app import login_manager
-from app.app import app
-from app.app import SESSION_EXPRIANCE_MIN
-from app.view.login.user_manager import UserManager
+from app.backend.app import login_manager
+from app.backend.app import app
+from app.backend.app import SESSION_EXPRIANCE_MIN
+from app.backend.view.login.user_manager import UserManager
 import flask_login
 
 
