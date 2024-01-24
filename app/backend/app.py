@@ -1,8 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
-from view.home.home import home
-from view.login.login import login
-from view.template.template import template
+
 
 login_manager = None
 app = None
@@ -26,6 +24,10 @@ def create_login_manager(app_instance: Flask):
 
 def register_blue_print(app_instance: Flask):
     # View connection
+    from view.home.home import home
+    from view.login.login import login
+    from view.template.template import template
+
     app_instance.register_blueprint(template)
     app_instance.register_blueprint(home)
     app_instance.register_blueprint(login)
