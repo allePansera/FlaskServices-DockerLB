@@ -26,5 +26,10 @@
     - Settiamo nginx come variabile d'ambiente
     - Definiamo il file 'Dockerfile' e nginx.conf
   
+  <br>
   Aggiornare propriamente il sistema andando a inserire una pagina di login 
   e una pagina semplice con dashboard.
+  
+  Controllare com aggiungere all'interno del Dockerfile l'esecuzione di angular e del db
+  https://levioconsulting.com/insights/how-to-dockerize-an-angular-application-with-nginx/
+  <br>
