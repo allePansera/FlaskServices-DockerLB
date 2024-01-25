@@ -17,7 +17,7 @@ LOGIN_FAILED = "Login failed"
 LOGOUT_SUCCESSFULLY = "Logout attempted correctly"
 LOGOUT_FAILED = "Logout failed"
 
-login = Blueprint('login', __name__, template_folder='templates', static_folder='static')
+login = Blueprint('login', __name__, template_folder='templates', static_folder='static', url_prefix='/login')
 
 
 @login_manager.user_loader

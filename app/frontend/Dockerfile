@@ -1,15 +1,14 @@
-# Build Angular
-FROM node:16-alpine as builder
+FROM node:18.12.1
 WORKDIR /app
-COPY package.json ./
+COPY package.json /app
+COPY . /app
+# set up angular cli
 RUN npm install
-COPY . .
-RUN npm run build
+RUN npm install -g @angular/cli@16.1.8
+# create dist
+RUN ng build
+# run the angular dist
+EXPOSE 4200
+CMD ng serve --host 0.0.0.0 --port 4200  --disable-host-check
 
-# Serve Angular using Nginx
-FROM nginx:alpine
-COPY --from=builder /app/dist ../nginx/html
-COPY ../nginx/nginx.conf /etc/nginx/conf.d/default.conf
-EXPOSE 80
-EXPOSE 443
-CMD ["nginx", "-g", "daemon off;"]
+

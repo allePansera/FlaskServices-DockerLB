@@ -5,8 +5,9 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "postbuild": "mv ./dist/angular/* ../backend/static/angular/*",
     "build-prod": "ng build --output-hashing none",
-    "postbuild-prod": "mv ./dist/angular/main.js ../static/angular/main.js",
+    "postbuild-prod": "mv ./dist/angular/* ../backend/static/angular/*",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
