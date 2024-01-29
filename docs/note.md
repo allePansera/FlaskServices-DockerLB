@@ -40,4 +40,8 @@
   Comandi Docker:
   - Build flask with angular:
   docker-compose up --build -d --scale backend=NUM_ISTANCES
+
+Se docker su win fa le bizze eseguire il seguente comando:
+ powershell -noprofile -executionpolicy bypass -file "C:\Users\allep\AppData\Roaming\npm\ng.ps1"
+
   

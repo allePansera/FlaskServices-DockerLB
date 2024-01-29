@@ -14,8 +14,7 @@ login_manager.init_app(app)
 # View connection
 from view.home.home import home
 from view.login.login import login
-from view.template.template import template
-app.register_blueprint(template)
+
 app.register_blueprint(home)
 app.register_blueprint(login)
 
