@@ -39,5 +39,5 @@
   <br>
   Comandi Docker:
   - Build flask with angular:
-  docker-compose up --build -d --scale app=4
+  docker-compose up --build -d --scale backend=NUM_ISTANCES
   
