@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_login import LoginManager
+from flask.blueprints import Blueprint
 
 # Session expirancy
 SESSION_EXPRIANCE_MIN = 360
@@ -17,6 +18,8 @@ from view.login.login import login
 
 # API prefix
 base_prefix = "/api"
-app.register_blueprint(home, url_prefix=base_prefix)
-app.register_blueprint(login, url_prefix=base_prefix)
+parent = Blueprint('parent', __name__, url_prefix=base_prefix)
+parent.register_blueprint(home)
+parent.register_blueprint(login)
+app.register_blueprint(parent)
 

@@ -5,8 +5,7 @@ import flask_login
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static', url_prefix='/home')
 
 
-@home.route('/dashboard', methods=["POST"])
-@flask_login.login_required
+@home.route('/dashboard', methods=["POST", "GET"])
 def dashboard():
     return jsonify({"status": True, "msg": "Test dashboard"})
 
