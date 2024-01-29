@@ -1,4 +1,5 @@
 from flask.blueprints import Blueprint
+from flask import jsonify
 import flask_login
 
 home = Blueprint('home', __name__, template_folder='templates', static_folder='static', url_prefix='/home')
@@ -7,4 +8,5 @@ home = Blueprint('home', __name__, template_folder='templates', static_folder='s
 @home.route('/dashboard', methods=["POST"])
 @flask_login.login_required
 def dashboard():
-    pass
+    return jsonify({"status": True, "msg": "Test dashboard"})
+
