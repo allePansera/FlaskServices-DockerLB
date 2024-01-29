@@ -15,6 +15,8 @@ login_manager.init_app(app)
 from view.home.home import home
 from view.login.login import login
 
-app.register_blueprint(home)
-app.register_blueprint(login)
+# API prefix
+base_prefix = "/api"
+app.register_blueprint(home, url_prefix=base_prefix)
+app.register_blueprint(login, url_prefix=base_prefix)
 
