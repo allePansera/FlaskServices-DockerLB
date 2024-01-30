@@ -1,2 +1,4 @@
 /.idea
 /app/frontend/node_modules
+/app/frontend/dist
+/app/frontend/.angular
