@@ -15,4 +15,7 @@ Segue una breve guida al deploy dell'architettura ideata sia per lo sviluppo che
   3.2)  pip install -r config/requirements.txt
 4) Eseguire il webserver con il comando python run.py 80 
 ## Production
-Da definire quando Angular sarà funzionante in ambiente di sviluppo
+Sarà sufficiente posizionarsi all'interno della cartella 'app' ed eseguire il
+seguente comando:
+<br>
+docker-compose up --build -d --scale backend=<NUM_ISTANZE>
