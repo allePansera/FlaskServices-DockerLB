@@ -8,11 +8,11 @@ export const anagrafiche = [
   {
     name: 'Anag. Esempio',
     icon: 'bi-circle',
-    url: "anagPage"
+    url: "/anagPage"
   },
   {
-    name: 'Anag. Esempio-copia',
+    name: 'Anag. Test Routing',
     icon: 'bi-circle',
-    url: "anagPage"
+    url: ""
   },
 ];
