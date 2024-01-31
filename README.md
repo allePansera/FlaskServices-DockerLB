@@ -1,8 +1,8 @@
-# Exectution
+# Execution
 Segue una breve guida al deploy dell'architettura ideata sia per lo sviluppo che per un ambiente production.
 ## Development
 ### Front-End
-1) Scaricare la versione di note LTS più recente, almeno la versione 18.13
+1) Scaricare la versione di node LTS più recente, almeno la versione 18.13
 2) Clonare il repo e posizionarsi all'interno della cartella 'frontend'
 3) Eseguire il comando npm install
 4) Eseguire il comando ng serve
