@@ -1,0 +1,21 @@
+<!-- login.component.html -->
+
+<div>
+  <h2>Login</h2>
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="user__id">ID Utente:</label>
+      <select id="user__id" formControlName="user__id">
+        <option *ngFor="let user of users" [value]="user.user__id">{{ user.username }}</option>
+      </select>
+    </div>
+    <div>
+      <label for="user_pwd">Password:</label>
+      <input type="password" id="user_pwd" name="user_pwd" formControlName="user_pwd" required>
+    </div>
+    <button type="submit">Login</button>
+  </form>
+  <div *ngIf="loginerr" style="color: red;">Errore in fase di autenticazione.</div>
+  <div *ngIf="errdescr" style="color: red;">{{ errdescr }}</div>
+</div>
+
