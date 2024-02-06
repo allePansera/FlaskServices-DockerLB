@@ -28732,25 +28732,25 @@
       inherit: SVG.Shape,
       // Add class methods
       extend: {
-        // (re)load image	
+        // (re)load image
         load: function load(url) {
           if (!url) return this;
           var self = this,
-              img = new window.Image(); // preload image	
+              img = new window.Image(); // preload image
 
           SVG.on(img, 'load', function () {
             SVG.off(img);
             var p = self.parent(SVG.Pattern);
-            if (p === null) return; // ensure image size	
+            if (p === null) return; // ensure image size
 
             if (self.width() == 0 && self.height() == 0) {
               self.size(img.width, img.height);
-            } // ensure pattern size if not set	
+            } // ensure pattern size if not set
 
 
             if (p && p.width() == 0 && p.height() == 0) {
               p.size(self.width(), self.height());
-            } // callback	
+            } // callback
 
 
             if (typeof self._loaded === 'function') {
@@ -28771,7 +28771,7 @@
           });
           return this.attr('href', img.src = this.src = url, SVG.xlink);
         },
-        // Add loaded callback	
+        // Add loaded callback
         loaded: function loaded(_loaded) {
           this._loaded = _loaded;
           return this;
@@ -28783,7 +28783,7 @@
       },
       // Add parent method
       construct: {
-        // create image element, load image and set its size	
+        // create image element, load image and set its size
         image: function image(source, width, height) {
           return this.put(new SVG.Image()).load(source).size(width || 0, height || width || 0);
         }
@@ -29481,10 +29481,10 @@
     } // Create matrix array for looping
 
 
-    var abcdef = 'abcdef'.split(''); // Add CustomEvent to IE9 and IE10	
+    var abcdef = 'abcdef'.split(''); // Add CustomEvent to IE9 and IE10
 
     if (typeof window.CustomEvent !== 'function') {
-      // Code from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent	
+      // Code from: https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent
       var CustomEventPoly = function CustomEventPoly(event, options) {
         options = options || {
           bubbles: false,
@@ -30815,7 +30815,7 @@
       var bbox = this.el.bbox();
       this.options = {};
 
-      // store defaults list of points in order to verify users config
+      // store defaults list of points in order to verify user config
       var points = this.el.selectize.defaults.points;
 
       // Merging the defaults and the options-object together
@@ -30847,7 +30847,7 @@
         this.options[pointsLists[i]] = option;
       }
 
-      // intersect correct all points options with users config (exclude unwanted points)
+      // intersect correct all points options with user config (exclude unwanted points)
       // ES5 -> NO arrow functions nor Array.includes()
       this.options.points = [ points, this.options.points ].reduce(
         function (a, b) {
@@ -32228,7 +32228,7 @@
         });
       }
       /**
-       * Allows users to update Options after the chart has rendered.
+       * Allows user to update Options after the chart has rendered.
        *
        * @param {object} options - A new config object can be passed which will be merged with the existing config object
        * @param {boolean} redraw - should redraw from beginning or should use existing paths and redraw from there
@@ -32285,7 +32285,7 @@
         return this.updateHelpers._updateOptions(options, redraw, animate, updateSyncedCharts, overwriteInitialConfig);
       }
       /**
-       * Allows users to update Series after the chart has rendered.
+       * Allows user to update Series after the chart has rendered.
        *
        * @param {array} series - New series which will override the existing
        */
@@ -32301,7 +32301,7 @@
         return this.updateHelpers._updateSeries(newSeries, animate, overwriteInitialSeries);
       }
       /**
-       * Allows users to append a new series after the chart has rendered.
+       * Allows user to append a new series after the chart has rendered.
        *
        * @param {array} newSerie - New serie which will be appended to the existing series
        */
@@ -32318,7 +32318,7 @@
         return this.updateHelpers._updateSeries(newSeries, animate, overwriteInitialSeries);
       }
       /**
-       * Allows users to append Data to series.
+       * Allows user to append Data to series.
        *
        * @param {array} newData - New data in the same format as series
        */
@@ -32640,7 +32640,7 @@
         }
       }
       /**
-       * This static method allows users to call chart methods without necessarily from the
+       * This static method allows user to call chart methods without necessarily from the
        * instance of the chart in case user has assigned chartID to the targeted chart.
        * The chartID is used for mapping the instance stored in Apex._chartInstances global variable
        *
