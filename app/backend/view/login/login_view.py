@@ -1,4 +1,5 @@
 from flask import redirect
+from flask import url_for
 from flask import session
 from flask import request
 from flask import jsonify
@@ -8,7 +9,7 @@ from datetime import timedelta
 from app import login_manager
 from app import app
 from app import SESSION_EXPRIANCE_MIN
-from view.login.user_manager import UserManager
+from view.user.user_manager import UserManager
 import flask_login
 
 
@@ -46,30 +47,30 @@ def make_session_permanent():
 @login_manager.unauthorized_handler
 def unauthorized_callback():
     """Redirects for unsupported request due to lack of permission"""
-    return redirect('/login/logout')
+    return redirect(url_for('login.logout'))
 
 
 @app.errorhandler(500)
 def internal_error(error):
     """Redirects to page containing 500 error description"""
     # TODO: Create error page
-    return redirect('/login/logout')
+    return redirect(url_for('login.logout'))
 
 
-@login.route('/request', methods=["POST"])
-def request():
+@login.route('/auth', methods=["POST"])
+def auth():
     """
     Check the login attempt considering the following expected variables:
-    :param ut____id: user attempted id
-    :param ut__pswd: user attempted passwd
+    :param user__id: user attempted id
+    :param user_pwd: user attempted passwd
     :return: {"status": True, "msg": LOGIN_SUCCESSFULLY} or
     {"status": False, "msg": LOGIN_FAILED}
     """
     try:
-        ut____id = request.form.get("ut____id", "")
-        ut__pswd = request.form.get("ut__pswd", "")
+        user__id = request.form.get("user__id", "")
+        user_pwd = request.form.get("user_pwd", "")
         user_manager = UserManager()
-        check, output = user_manager.check(id=ut____id, password=ut__pswd)
+        check, output = user_manager.check(user__id, user_pwd)
         if check:
             user_instance = output
             flask_login.login_user(user_instance)

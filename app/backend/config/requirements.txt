@@ -1,4 +1,7 @@
-Flask
-Flask-Login
-flask-classful
+werkzeug==2.3
+flask==3.0.2
+flask-login
+Flask-DebugToolbar --upgrade
+flask-classful --upgrade
 tqdm
+db-sqlite3
