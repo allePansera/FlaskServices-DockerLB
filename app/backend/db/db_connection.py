@@ -39,17 +39,22 @@ class SQLiteDBManager:
         except sqlite3.Error as e:
             print("Error executing query: ", e)
 
-    def fetch_all(self, query):
+    def fetch_all(self, query, json=False):
         try:
+            if json:
+                self.connection.row_factory = sqlite3.Row
+                self.cursor = self.connection.cursor()
             self.cursor.execute(query)
             rows = self.cursor.fetchall()
-            return rows
+            if json:
+                return [{key: row[key] for key in row.keys()} for row in rows]
+            else:
+                return rows
         except sqlite3.Error as e:
             print("Error fetching data: ", e)
 
     def disconnect(self):
         if self.connection:
             self.connection.close()
-            print("Connection closed.")
         else:
             print("Cannot close connection until it's not open...")

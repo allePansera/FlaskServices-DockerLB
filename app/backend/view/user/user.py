@@ -10,8 +10,12 @@ class User(UserMixin):
         :param user_pwd: user password
         :param userrole: user role
         """
+        self.id = user__id
         self.user__id = user__id
         self.username = username
         self.user_pwd = user_pwd
         self.userrole = userrole
+
+    def get_id(self):
+        return self.user__id
 

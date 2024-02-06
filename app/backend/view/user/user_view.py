@@ -12,8 +12,8 @@ user = Blueprint('user', __name__, template_folder='templates', static_folder='s
 def list():
     """
     Endpoint used to populate select
-    :return: {msg: list of username and related id}
+    :return: list of username and related id
     """
     user_manager = UserManager()
-    output = user_manager.get_users(exclude=['user_pwd', 'userrole'])
-    return jsonify({"msg": output})
+    output = user_manager.get_users(exclude_keys=['user_pwd', 'userrole'])
+    return jsonify(output)

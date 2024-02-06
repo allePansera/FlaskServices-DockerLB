@@ -1,9 +1,10 @@
 // login.component.ts
 import {Component, OnInit} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth/auth.service';
 import { UserService } from '../services/user/user.service';
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -22,8 +23,8 @@ export class LoginComponent implements OnInit {
   req__api: string = "/api/login/auth";
 
   constructor(private fb: FormBuilder, private loginService: AuthService,
-              private http: HttpClient, private UserService: UserService
-              ) { }
+              private http: HttpClient, private UserService: UserService,
+              private router: Router) { }
 
   ngOnInit() {
     // Define form items
@@ -32,7 +33,12 @@ export class LoginComponent implements OnInit {
       user_pwd: ['', Validators.required]
     });
     // Get users to store them inside a select item
-    this.users = this.UserService.getUsers()
+    this.UserService.getUsers().subscribe(
+      users => {
+        this.users = users;
+      }
+    );
+
   }
 
   onSubmit() {
@@ -51,10 +57,18 @@ export class LoginComponent implements OnInit {
           next: response => {
             this.loginerr = response.status;
             this.errdescr = response.msg;
+            if(response.status) {
+              this.loginService.login(this.user__id, this.username, this.user_pwd);
+              this.router.navigate(['/'])
+            }
+            else{
+              this.loginService.logout();
+            }
           },
           error: error => {
             this.loginerr = true;
             this.errdescr = error;
+            this.loginService.logout();
           }
         }
       );

@@ -21,17 +21,17 @@ class UserManager:
         , ...]
         """
         QUERY_SELECT_USER = """
-        SELECT user__id, username, user_pwd, userrole
-        FROM user"""
+        SELECT 
+        user__id, username, user_pwd, userrole
+        FROM users"""
         db_connection = SQLiteDBManager()
         db_connection.connect()
-        rows = db_connection.fetch_all(QUERY_SELECT_USER)
+        rows = db_connection.fetch_all(QUERY_SELECT_USER, json=True)
         db_connection.disconnect()
-        rows_dict = json.dumps([dict(ix) for ix in rows])
-        for dict in rows_dict:
+        for inner_dict in rows:
             for key in exclude_keys:
-                dict.pop(key, None)
-        return rows_dict
+                inner_dict.pop(key, None)
+        return rows
 
     def get_roles(self):
         """

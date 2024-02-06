@@ -11,10 +11,11 @@ from app import app
 from app import SESSION_EXPRIANCE_MIN
 from view.user.user_manager import UserManager
 import flask_login
+import json
 
 
 LOGIN_SUCCESSFULLY = "Login attempted correctly"
-LOGIN_FAILED = "Login failed"
+LOGIN_FAILED = "Login failed, wrong credentials"
 LOGOUT_SUCCESSFULLY = "Logout attempted correctly"
 LOGOUT_FAILED = "Logout failed"
 
@@ -67,8 +68,9 @@ def auth():
     {"status": False, "msg": LOGIN_FAILED}
     """
     try:
-        user__id = request.form.get("user__id", "")
-        user_pwd = request.form.get("user_pwd", "")
+        req = json.loads(request.data.decode())
+        user__id = req.get("user__id", "")
+        user_pwd = req.get("user_pwd", "")
         user_manager = UserManager()
         check, output = user_manager.check(user__id, user_pwd)
         if check:

@@ -6,39 +6,39 @@ import { Injectable } from '@angular/core';
 export class AuthService {
 
   private isLoggedIn: boolean = false;
-  private user_id: number | null = null;
+  private user__id: string | null = null;
   private username: string | null = null;
-  private userrole: string | null = null;
+  private user_pwd: string | null = null;
 
   constructor() { }
 
-  login(user_id: number, username: string, userrole: string) {
+  login(user__id: string, username: string, user_pwd: string) {
     this.isLoggedIn = true;
-    this.user_id = user_id;
+    this.user__id = user__id;
     this.username = username;
-    this.userrole = userrole;
+    this.user_pwd = user_pwd;
   }
 
   logout() {
     this.isLoggedIn = false;
-    this.user_id = null;
+    this.user__id = null;
     this.username = null;
-    this.userrole = null;
+    this.user_pwd = null;
   }
 
   isLoggedInUser(): boolean {
     return this.isLoggedIn;
   }
 
-  getUserId(): number | null {
-    return this.user_id;
+  getUserId(): string | null {
+    return this.user__id;
   }
 
   getUsername(): string | null {
     return this.username;
   }
 
-  getUserRole(): string | null {
-    return this.userrole;
+  getUserPwd(): string | null {
+    return this.user_pwd;
   }
 }

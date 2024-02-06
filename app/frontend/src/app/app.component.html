@@ -1,6 +1,6 @@
-<app-searchbar></app-searchbar>
+<app-searchbar *ngIf="authService.isLoggedInUser()"></app-searchbar>
 
-<app-sidebar></app-sidebar>
+<app-sidebar *ngIf="authService.isLoggedInUser()"></app-sidebar>
 
 <router-outlet>
   <!-- Qui verrà renderizzato tutto quello che si trova nel componente che si sta visualizzando -->
