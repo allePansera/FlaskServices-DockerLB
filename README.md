@@ -5,7 +5,7 @@ Segue una breve guida al deploy dell'architettura ideata sia per lo sviluppo che
 1) Scaricare la versione di note LTS più recente, almeno la versione 18.13
 2) Clonare il repo e posizionarsi all'interno della cartella 'frontend'
 3) Eseguire il comando npm install
-4) Eseguire il comando ng serve
+4) Eseguire il comando ng serve --proxy-config proxy.conf.json
 5) Controllare che l'applicazione sia stata correttamente rilasciata presso l'indirizzo http://localhost:4200
 ### Back-End
 1) Scaricare la versione di python 3.8
