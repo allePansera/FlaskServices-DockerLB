@@ -16,4 +16,4 @@ def list():
     """
     user_manager = UserManager()
     output = user_manager.get_users(exclude_keys=['user_pwd', 'userrole'])
-    return jsonify(output)
+    return jsonify(output), 200
