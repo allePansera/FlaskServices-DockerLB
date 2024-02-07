@@ -22,9 +22,6 @@ export class AuthService {
     this.isLoggedInSubject.next(this.session.getItem('isLoggedInSubject') === 'true');
     this.user__id = this.session.getItem('user__id');
     this.username = this.session.getItem('username');
-    console.log(this.user__id);
-    console.log(this.username);
-
   }
 
   login(user__id: string, username: string, user_pwd: string): Observable<any> {
