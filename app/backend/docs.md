@@ -16,10 +16,17 @@ so client http handler can use its own 'error' handler without using extra if st
 Blueprint are used to handle page requests. 
 The structure is similar to Classful but we can incapsulate services considering also url prefix.
 ## Class structure
-
+Avoid creating, as we did before, a 'OOP' directory. Class are inside the related view.
 ## DB
-
+Temporary SQLite is used to share the db as a file inside GitHub.
+Update also the connector for further connection type.
 ## Tests
+To implements, used to check for data_manager functionalities.
+- 'apache jmeter' tests and flask: traffic analysis
+- 'unittest' testing for single blueprint
+## Logging
+Build granular logging system with frequent zip archive building per day
 # ToDo
 - Tests implementation
 - Log implementation
+- Params for session inside db with related view for angular setup
