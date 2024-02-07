@@ -17,10 +17,10 @@ export class LoginComponent implements OnInit {
   user__id: string = '';
   username: string = '';
   user_pwd: string = '';
-  loginerr: boolean = false;
-  errdescr: string = '';
+  login_error_status: boolean = false;
+  login_error_descr: string = '';
   users: any[] = [];
-  req__api: string = "/api/login/auth";
+
 
   constructor(private fb: FormBuilder, private authService: AuthService,
               private http: HttpClient, private userService: UserService,
@@ -44,38 +44,28 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    // HTTP req structure
-    const userData = {
-      user__id: this.loginForm.value.user__id,
-      user_pwd: this.loginForm.value.user_pwd
-    }
-    const headers = new HttpHeaders().append('Content-Type', 'application/json');
-    const body=JSON.stringify(userData);
-    // HTTP req. execution
-    /* TODO: Mettere dentro al service la chiamata e qua dentro tenere solamente
-        la redirect e aggiornamento delle variabili del form */
-    this.http
-      .post<any>(this.req__api, body, {
-        headers: headers})
-      .subscribe({
-          next: response => {
-            this.loginerr = response.status;
-            this.errdescr = response.msg;
-            if(response.status) {
-              this.authService.login(this.user__id, this.username, this.user_pwd);
-              this.router.navigate(['/'])
-            }
-            else{
-              this.authService.logout();
-            }
-          },
-          error: error => {
-            this.loginerr = true;
-            this.errdescr = error;
-            this.authService.logout();
-          }
-        }
-      );
+    // Read form values
+    const form_user__id = this.loginForm.value.user__id;
+    const form_username = this.loginForm.value.username;
+    const form_user_pwd = this.loginForm.value.user_pwd;
+    // Invoke login func.
+    this.login(form_user__id, form_username, form_user_pwd);
+  }
+
+  login(user__id: string, username: string, user_pwd: string){
+    this.authService.login(user__id, username, user_pwd).subscribe(response => {
+      if (response.status) {
+        // Update login var
+        this.login_error_status = ! response.status;
+        this.login_error_descr = response.message;
+        // Login successful, navigate to home page
+        this.router.navigate(["/"]);
+      } else {
+        // Login failed, display error message
+        this.login_error_status = response.status;
+        this.login_error_descr = response.message;
+      }
+    });
   }
 
 }

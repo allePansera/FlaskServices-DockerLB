@@ -76,11 +76,11 @@ def auth():
         if check:
             user_instance = output
             flask_login.login_user(user_instance)
-            return jsonify({"status": True, "msg": LOGIN_SUCCESSFULLY})
+            return jsonify(message=LOGIN_SUCCESSFULLY), 200
         else:
-            return jsonify({"status": False, "msg": LOGIN_FAILED})
+            return jsonify(message=LOGIN_FAILED), 401
     except Exception as e:
-        return jsonify({"status": False, "msg": str(e)})
+        return jsonify(message=str(e)), 503
 
 
 @login.route('/logout', methods=["POST"])
@@ -93,8 +93,8 @@ def logout():
     try:
         if current_user.is_authenticated:
             flask_login.logout_user()
-            return jsonify({"status": True, "msg": LOGOUT_SUCCESSFULLY})
+            return jsonify(message=LOGOUT_SUCCESSFULLY), 200
         else:
-            return jsonify({"status": False, "msg": LOGOUT_FAILED})
+            return jsonify(message=LOGOUT_FAILED), 401
     except Exception as e:
-        return jsonify({"status": False, "msg": str(e)})
+        return jsonify(message=str(e)), 503

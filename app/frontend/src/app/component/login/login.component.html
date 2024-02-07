@@ -15,7 +15,7 @@
     </div>
     <button type="submit">Login</button>
   </form>
-  <div *ngIf="loginerr" style="color: red;">Errore in fase di autenticazione.</div>
-  <div *ngIf="errdescr" style="color: red;">{{ errdescr }}</div>
+  <br>
+  <div *ngIf="login_error_descr" style="color: red;">{{ login_error_descr }}</div>
 </div>
 
