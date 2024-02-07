@@ -2,8 +2,8 @@
 import {Component, OnInit} from '@angular/core';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth/auth.service';
-import { UserService } from '../services/user/user.service';
+import { AuthService } from '../../services/auth/auth.service';
+import { UserService } from '../../services/user/user.service';
 import {Router} from "@angular/router";
 
 
@@ -22,18 +22,20 @@ export class LoginComponent implements OnInit {
   users: any[] = [];
   req__api: string = "/api/login/auth";
 
-  constructor(private fb: FormBuilder, private loginService: AuthService,
-              private http: HttpClient, private UserService: UserService,
+  constructor(private fb: FormBuilder, private authService: AuthService,
+              private http: HttpClient, private userService: UserService,
               private router: Router) { }
 
   ngOnInit() {
+    // Reset auth service -> logout
+    this.authService.logout();
     // Define form items
     this.loginForm = this.fb.group({
       user__id: ['', Validators.required],
       user_pwd: ['', Validators.required]
     });
     // Get users to store them inside a select item
-    this.UserService.getUsers().subscribe(
+    this.userService.getUsers().subscribe(
       users => {
         this.users = users;
       }
@@ -50,6 +52,8 @@ export class LoginComponent implements OnInit {
     const headers = new HttpHeaders().append('Content-Type', 'application/json');
     const body=JSON.stringify(userData);
     // HTTP req. execution
+    /* TODO: Mettere dentro al service la chiamata e qua dentro tenere solamente
+        la redirect e aggiornamento delle variabili del form */
     this.http
       .post<any>(this.req__api, body, {
         headers: headers})
@@ -58,17 +62,17 @@ export class LoginComponent implements OnInit {
             this.loginerr = response.status;
             this.errdescr = response.msg;
             if(response.status) {
-              this.loginService.login(this.user__id, this.username, this.user_pwd);
+              this.authService.login(this.user__id, this.username, this.user_pwd);
               this.router.navigate(['/'])
             }
             else{
-              this.loginService.logout();
+              this.authService.logout();
             }
           },
           error: error => {
             this.loginerr = true;
             this.errdescr = error;
-            this.loginService.logout();
+            this.authService.logout();
           }
         }
       );

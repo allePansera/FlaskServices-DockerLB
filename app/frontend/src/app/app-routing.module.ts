@@ -1,15 +1,16 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {HomepageComponent} from "./homepage/homepage.component";
-import {AnagraficaBaseComponent} from "./anagrafica-base/anagrafica-base.component";
-import {AnagTestComponent} from "./anag-test/anag-test.component";
-import {LoginComponent} from "./login/login.component";
+import { AuthPolicyGuard } from './guards/auth/auth.guard';
+import {HomepageComponent} from "./component/homepage/homepage.component";
+import {AnagraficaBaseComponent} from "./component/anagrafica-base/anagrafica-base.component";
+import {AnagTestComponent} from "./component/anag-test/anag-test.component";
+import {LoginComponent} from "./component/login/login.component";
 
 const routes: Routes = [
-  {path: '', component: HomepageComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'anagraficabase', component: AnagTestComponent},
-  {path: 'anagraficabase/anagPage', component: AnagraficaBaseComponent}
+  {path: '', component: HomepageComponent, canActivate: [AuthPolicyGuard]},
+  {path: 'anagraficabase', component: AnagTestComponent, canActivate: [AuthPolicyGuard]},
+  {path: 'anagraficabase/anagPage', component: AnagraficaBaseComponent, canActivate: [AuthPolicyGuard]}
 ];
 
 @NgModule({
