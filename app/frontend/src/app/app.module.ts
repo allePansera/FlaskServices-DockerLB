@@ -5,7 +5,7 @@ import {AppRoutingModule} from './app-routing.module';
 // Components
 import {AppComponent} from './app.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
-import {AnagraficaBaseComponent} from './component/anagrafica-base/anagrafica-base.component';
+import {AnagraficaBaseComponent} from './component/anagrafica-base-NOTUSED/anagrafica-base.component';
 import {SearchbarComponent} from './component/searchbar/searchbar.component';
 // External Moduls
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
@@ -13,8 +13,10 @@ import {AgGridModule} from 'ag-grid-angular';
 import {HttpClientModule} from '@angular/common/http';
 import {ReactiveFormsModule, FormsModule} from "@angular/forms";
 import {HomepageComponent} from './component/homepage/homepage.component';
-import { AnagTestComponent } from './component/anag-test/anag-test.component';
+import { UserRegistryComponent } from './component/user-registry/user-registry.component';
 import { LoginComponent } from './component/login/login.component';
+import { FilterSectionComponent } from './component/composable/filter-section/filter-section.component';
+import { DatatableSectionComponent } from './component/composable/datatable-section/datatable-section.component';
 
 @NgModule({
   declarations: [
@@ -23,8 +25,10 @@ import { LoginComponent } from './component/login/login.component';
     AnagraficaBaseComponent,
     SearchbarComponent,
     HomepageComponent,
-    AnagTestComponent,
-    LoginComponent
+    UserRegistryComponent,
+    LoginComponent,
+    FilterSectionComponent,
+    DatatableSectionComponent
   ],
   imports: [
     BrowserModule,

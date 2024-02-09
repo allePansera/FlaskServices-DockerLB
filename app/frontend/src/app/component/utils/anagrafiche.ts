@@ -6,13 +6,8 @@ export interface Anagrafiche {
 
 export const anagrafiche = [
   {
-    name: 'Anag. Esempio',
+    name: 'User registry',
     icon: 'bi-circle',
-    url: "/anagPage"
-  },
-  {
-    name: 'Anag. Test Routing',
-    icon: 'bi-circle',
-    url: ""
+    url: ''
   },
 ];

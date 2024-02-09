@@ -8,11 +8,16 @@ import {Observable} from "rxjs";
 })
 export class UserService {
 
-  private list_api = 'api/user/list';
+  private user_login_list = 'api/user/list/login';
+  private user_registry_list = 'api/user/list/registry';
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<any> {
-    return this.http.get(this.list_api);
+  getUsersLogin(): Observable<any> {
+    return this.http.get(this.user_login_list);
+  }
+
+  getUsersRegistry(): Observable<any> {
+    return this.http.get(this.user_registry_list);
   }
 }

@@ -14,7 +14,7 @@ import {RowNode, Column} from "ag-grid-community";
 
 
 @Component({
-  selector: 'app-anagrafica-base',
+  selector: 'app-anagrafica-base-NOTUSED',
   templateUrl: './anagrafica-base.component.html',
   styleUrls: ['./anagrafica-base.component.css']
 })

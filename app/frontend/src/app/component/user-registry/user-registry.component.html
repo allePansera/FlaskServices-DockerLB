@@ -1,0 +1,43 @@
+<div class="main" id="main">
+  <!-- TITOLO -->
+  <div class="pagetitle">
+    <h1>User registry</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item">User registry</li>
+      </ol>
+    </nav>
+  </div>
+
+  <!-- CONTENUTO -->
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="card-body">
+            <!-- Card title -->
+            <h5 class="mb-0 card-title">User registry</h5>
+          </div>
+        </div>
+        <!-- Ag grid section -->
+        <div>
+          <ag-grid-angular
+            class="ag-theme-alpine"
+            [gridOptions]="gridOptions"
+            [columnDefs]="columnDefs"
+            [rowData]="rowData"
+            (gridReady)="onGridReady($event)"
+            (selectionChanged)="onSelectionChanged($event)"
+            (cellClicked)="onCellClicked($event)"
+          >
+          </ag-grid-angular>
+        </div>
+        <!-- Close page -->
+        <a href="/" class="btn btn-secondary">Chiudi</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+

@@ -9,19 +9,14 @@
       </a>
     </li><!-- End Dashboard Nav -->
 
-    <li class="nav-heading">Anagrafiche</li>
+    <li class="nav-heading">Registry</li>
     <a class="nav-link collapsed" data-bs-target="#anagrafiche" data-bs-toggle="collapse" href="#">
-      <i class="bx bxl-visa"></i><span>Pagine di esempio</span><i class="bi bi-chevron-down ms-auto"></i>
+      <i class="bx bx-cabinet"></i><span>Registry</span><i class="bi bi-chevron-down ms-auto"></i>
     </a>
     <ul id="anagrafiche" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li class="nav-item">
         <div *ngFor="let anag of anagrafiche">
-
-          <!--<a [routerLink]="['/anagraficabase', anag.url]">
-            <i class="bi {{ anag.icon }}"></i><span>{{anag.name}}</span>
-          </a>-->
-
-          <a [routerLink]="'/anagraficabase' + anag.url">
+          <a [routerLink]="'/anagrafica_base' + anag.url">
             <i class="bi {{ anag.icon }}"></i><span>{{anag.name}}</span>
           </a>
 

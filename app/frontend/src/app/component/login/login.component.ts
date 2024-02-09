@@ -35,7 +35,7 @@ export class LoginComponent implements OnInit {
       user_pwd: ['', Validators.required]
     });
     // Get users to store them inside a select item
-    this.userService.getUsers().subscribe(
+    this.userService.getUsersLogin().subscribe(
       users => {
         this.users = users;
       }
@@ -46,26 +46,28 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     // Read form values
     const form_user__id = this.loginForm.value.user__id;
-    const form_username = this.loginForm.value.username;
+    const form_username = this.users.find(item => item['user__id'] === form_user__id).username;
     const form_user_pwd = this.loginForm.value.user_pwd;
     // Invoke login func.
     this.login(form_user__id, form_username, form_user_pwd);
   }
 
   login(user__id: string, username: string, user_pwd: string){
-    this.authService.login(user__id, username, user_pwd).subscribe(response => {
-      if (response.status) {
-        // Update login var
-        this.login_error_status = ! response.status;
-        this.login_error_descr = response.message;
-        // Login successful, navigate to home page
-        this.router.navigate(["/"]);
-      } else {
-        // Login failed, display error message
-        this.login_error_status = response.status;
-        this.login_error_descr = response.message;
-      }
-    });
+    if(this.loginForm.valid){
+      this.authService.login(user__id, username, user_pwd).subscribe(response => {
+        if (response.status) {
+          // Update login var
+          this.login_error_status = ! response.status;
+          this.login_error_descr = response.message;
+          // Login successful, navigate to home page
+          this.router.navigate(["/"]);
+        } else {
+          // Login failed, display error message
+          this.login_error_status = response.status;
+          this.login_error_descr = response.message;
+        }
+      });
+    }
   }
 
 }
