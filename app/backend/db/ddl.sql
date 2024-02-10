@@ -34,3 +34,16 @@ CREATE TABLE IF NOT EXISTS users(
     userrole VARCHAR(5) NOT NULL DEFAULT 'GUEST',
     FOREIGN KEY (userrole) REFERENCES users_roles(role__id)
 );
+
+CREATE TABLE IF NOT EXISTS categories(
+    cate__id VARCHAR(100) PRIMARY KEY,
+    catename VARCHAR(1000) NOT NULL DEFAULT ''
+);
+
+CREATE TABLE IF NOT EXISTS products(
+    prod__id VARCHAR(100) PRIMARY KEY,
+    prodname VARCHAR(1000) NOT NULL DEFAULT '',
+    proddesc VARCHAR(10000) DEFAULT '',
+    prodcate VARCHAR(100) NOT NULL,
+    FOREIGN KEY (prodcate) REFERENCES categories(cate__id)
+);

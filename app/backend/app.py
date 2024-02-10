@@ -26,6 +26,8 @@ db_connection.disconnect()
 from view.home.home_view import home
 from view.login.login_view import login
 from view.user.user_view import user
+from view.category.category_view import category
+from view.product.product_view import product
 
 # API prefix
 base_prefix = "/api"
@@ -33,5 +35,7 @@ parent = Blueprint('parent', __name__, url_prefix=base_prefix)
 parent.register_blueprint(home)
 parent.register_blueprint(login)
 parent.register_blueprint(user)
+parent.register_blueprint(category)
+parent.register_blueprint(product)
 app.register_blueprint(parent)
 

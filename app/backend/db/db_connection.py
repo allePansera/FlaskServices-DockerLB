@@ -32,19 +32,25 @@ class SQLiteDBManager:
         except sqlite3.Error as e:
             print("Error connecting to DB: ", e)
 
-    def execute_query(self, query):
+    def execute_query(self, query, params=None):
         try:
-            self.cursor.execute(query)
+            if params:
+                self.cursor.execute(query, params)
+            else:
+                self.cursor.execute(query)
             self.connection.commit()
         except sqlite3.Error as e:
             print("Error executing query: ", e)
 
-    def fetch_all(self, query, json=False):
+    def fetch_all(self, query, params=None, json=False):
         try:
             if json:
                 self.connection.row_factory = sqlite3.Row
                 self.cursor = self.connection.cursor()
-            self.cursor.execute(query)
+            if params:
+                self.cursor.execute(query, params)
+            else:
+                self.cursor.execute(query)
             rows = self.cursor.fetchall()
             if json:
                 return [{key: row[key] for key in row.keys()} for row in rows]

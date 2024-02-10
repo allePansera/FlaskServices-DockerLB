@@ -17220,12 +17220,12 @@
     }
     /**
      * [The strategy of the arrengment of data dimensions for dataset]:
-     * "value way": all axes are non-category axes. So series one by one take
+     * "value way": all axes are non-category-category-registry axes. So series one by one take
      *     several (the number is coordSysDims.length) dimensions from dataset.
      *     The result of data arrengment of data dimensions like:
      *     | ser0_x | ser0_y | ser1_x | ser1_y | ser2_x | ser2_y |
-     * "category way": at least one axis is category axis. So the the first data
-     *     dimension is always mapped to the first category axis and shared by
+     * "category-category-registry way": at least one axis is category-category-registry axis. So the the first data
+     *     dimension is always mapped to the first category-category-registry axis and shared by
      *     all of the series. The other data dimensions are taken by series like
      *     "value way" does.
      *     The result of data arrengment of data dimensions like:
@@ -17279,14 +17279,14 @@
           datasetRecord.valueWayDim += count; // ??? TODO give a better default series name rule?
           // especially when encode x y specified.
           // consider: when multiple series share one dimension
-          // category axis, series name should better use
+          // category-category-registry axis, series name should better use
           // the other dimension name. On the other hand, use
           // both dimensions name.
-        } // In category way, the first category axis.
+        } // In category-category-registry way, the first category-category-registry axis.
         else if (baseCategoryDimIndex === coordDimIdx) {
             pushDim(encode[coordDimName], 0, count);
             pushDim(encodeItemName, 0, count);
-          } // In category way, the other axis.
+          } // In category-category-registry way, the other axis.
           else {
               var start = datasetRecord.categoryWayDim;
               pushDim(encode[coordDimName], start, count);
@@ -19685,7 +19685,7 @@
         var dataArrayRows = data; // Rule: Most of the first line are string: it is header.
         // Caution: consider a line with 5 string and 1 number,
         // it still can not be sure it is a head, because the
-        // 5 string may be 5 values of category columns.
+        // 5 string may be 5 values of category-category-registry columns.
 
         if (sourceHeader === 'auto' || sourceHeader == null) {
           arrayRowsTravelFirst(function (val) {
@@ -20682,7 +20682,7 @@
       var dimType = opt && opt.type;
 
       if (dimType === 'ordinal') {
-        // If given value is a category string
+        // If given value is a category-category-registry string
         return value;
       }
 
@@ -21450,8 +21450,8 @@
             dataItem = provider.getItem(idx, dataItem); // Each data item is value
             // [1, 2]
             // 2
-            // Bar chart, line chart which uses category axis
-            // only gives the 'y' value. 'x' value is the indices of category
+            // Bar chart, line chart which uses category-category-registry axis
+            // only gives the 'y' value. 'x' value is the indices of category-category-registry
             // Use a tempValue to normalize the value to be a (x, y) value
             // Store the data by dimensions
 
@@ -22817,7 +22817,7 @@
     }
 
     function formatTooltipArrayValue(value, series, dataIndex, tooltipDims, colorStr) {
-      // check: category-no-encode-has-axis-data in dataset.html
+      // check: category-category-registry-no-encode-has-axis-data in dataset.html
       var data = series.getData();
       var isValueMultipleLine = reduce(value, function (isValueMultipleLine, val, idx) {
         var dimItem = data.getDimensionInfo(idx);
@@ -24878,7 +24878,7 @@
      * `chart.on('click', query, handler);`
      * The `query` can be:
      * + The component type query string, only `mainType` or `mainType.subType`,
-     *   like: 'xAxis', 'series', 'xAxis.category' or 'series.line'.
+     *   like: 'xAxis', 'series', 'xAxis.category-category-registry' or 'series.line'.
      * + The component query object, like:
      *   `{seriesIndex: 2}`, `{seriesName: 'xx'}`, `{seriesId: 'some'}`,
      *   `{xAxisIndex: 2}`, `{xAxisName: 'xx'}`, `{xAxisId: 'some'}`.
@@ -30464,8 +30464,8 @@
         var isFormatOriginal = sourceFormat === SOURCE_FORMAT_ORIGINAL; // Each data item is value
         // [1, 2]
         // 2
-        // Bar chart, line chart which uses category axis
-        // only gives the 'y' value. 'x' value is the indices of category
+        // Bar chart, line chart which uses category-category-registry axis
+        // only gives the 'y' value. 'x' value is the indices of category-category-registry
         // Use a tempValue to normalize the value to be a (x, y) value
         // If dataItem is {name: ...} or {id: ...}, it has highest priority.
         // This kind of ids and names are always stored `_nameList` and `_idList`.
@@ -31509,8 +31509,8 @@
      *         x: xAxisModel,
      *         y: undefined
      *     }),
-     *     // The index of the first category axis in `coordSysDims`.
-     *     // `null/undefined` means no category axis exists.
+     *     // The index of the first category-category-registry axis in `coordSysDims`.
+     *     // `null/undefined` means no category-category-registry axis exists.
      *     firstCategoryDimIndex: 1,
      *     // To replace user specified encode.
      * }
@@ -32039,21 +32039,21 @@
 
       OrdinalMeta.prototype.parseAndCollect = function (category) {
         var index;
-        var needCollect = this._needCollect; // The value of category dim can be the index of the given category set.
+        var needCollect = this._needCollect; // The value of category-category-registry dim can be the index of the given category-category-registry set.
         // This feature is only supported when !needCollect, because we should
         // consider a common case: a value is 2017, which is a number but is
-        // expected to be tread as a category. This case usually happen in dataset,
+        // expected to be tread as a category-category-registry. This case usually happen in dataset,
         // where it happent to be no need of the index feature.
 
         if (!isString(category) && !needCollect) {
           return category;
         } // Optimize for the scenario:
-        // category is ['2012-01-01', '2012-01-02', ...], where the input
+        // category-category-registry is ['2012-01-01', '2012-01-02', ...], where the input
         // data has been ensured not duplicate and is large data.
         // Notice, if a dataset dimension provide categroies, usually echarts
         // should remove duplication except user tell echarts dont do that
         // (set axis.deduplication = false), because echarts do not know whether
-        // the values in the category dimension has duplication (consider the
+        // the values in the category-category-registry dimension has duplication (consider the
         // parallel-aqi example)
 
 
@@ -32296,7 +32296,7 @@
           var ordinalNumber = infoOrdinalNumbers[tickNum];
           ordinalsByTick[tickNum] = ordinalNumber;
           ticksByOrdinal[ordinalNumber] = tickNum;
-        } // Handle that `series.data` only covers part of the `axis.category.data`.
+        } // Handle that `series.data` only covers part of the `axis.category-category-registry.data`.
 
 
         var unusedOrdinal = 0;
@@ -32807,7 +32807,7 @@
     }
 
     function doCalBarWidthAndOffset(seriesInfoList) {
-      // Columns info on each category axis. Key is cartesian name
+      // Columns info on each category-category-registry axis. Key is cartesian name
       var columnsMap = {};
       each(seriesInfoList, function (seriesInfo, idx) {
         var axisKey = seriesInfo.axisKey;
@@ -33861,7 +33861,7 @@
 
         if (isOrdinal) {
           // FIXME: there is a flaw here: if there is no "block" data processor like `dataZoom`,
-          // and progressive rendering is using, here the category result might just only contain
+          // and progressive rendering is using, here the category-category-registry result might just only contain
           // the processed chunk rather than the entire result.
           this._axisDataLen = model.getCategories().length;
         } else {
@@ -34201,7 +34201,7 @@
      * @return Label formatter function.
      *         param: {number} tickValue,
      *         param: {number} idx, the index in all ticks.
-     *                         If category axis, this param is not required.
+     *                         If category-category-registry axis, this param is not required.
      *         return: {string} label string.
      */
 
@@ -34218,7 +34218,7 @@
       } else if (isString(labelFormatter)) {
         return function (tpl) {
           return function (tick) {
-            // For category axis, get raw value; for numeric axis,
+            // For category-category-registry axis, get raw value; for numeric axis,
             // get formatted label like '1,333,444'.
             var label = axis.scale.getLabel(tick);
             var text = tpl.replace('{value}', label != null ? label : '');
@@ -34229,7 +34229,7 @@
         return function (cb) {
           return function (tick, idx) {
             // The original intention of `idx` is "the index of the tick in all ticks".
-            // But the previous implementation of category axis do not consider the
+            // But the previous implementation of category-category-registry axis do not consider the
             // `axisLabel.interval`, which cause that, for example, the `interval` is
             // `1`, then the ticks "name5", "name7", "name9" are displayed, where the
             // corresponding `idx` are `0`, `2`, `4`, but not `0`, `1`, `2`. So we keep
@@ -34250,9 +34250,9 @@
       }
     }
     function getAxisRawValue(axis, tick) {
-      // In category axis with data zoom, tick is not the original
+      // In category-category-registry axis with data zoom, tick is not the original
       // index of axis.data. So tick should not be exposed to user
-      // in category axis.
+      // in category-category-registry axis.
       return axis.type === 'category' ? axis.scale.getLabel(tick) : tick.value;
     }
     /**
@@ -34270,7 +34270,7 @@
 
       var realNumberScaleTicks;
       var tickCount;
-      var categoryScaleExtent = scale.getExtent(); // Optimize for large category data, avoid call `getTicks()`.
+      var categoryScaleExtent = scale.getExtent(); // Optimize for large category-category-registry data, avoid call `getTicks()`.
 
       if (scale instanceof OrdinalScale) {
         tickCount = scale.count();
@@ -34439,7 +34439,7 @@
         // Currently AxisModelCommonMixin has nothing to do with the
         // the requirements of `axisHelper.createScaleByModel`. For
         // example the methods `getCategories` and `getOrdinalMeta`
-        // are required for `'category'` axis, and ecModel is required
+        // are required for `'category-category-registry'` axis, and ecModel is required
         // for `'time'` axis. But occasionally echarts-gl happened
         // to only use `'value'` axis.
         // zrUtil.mixin(axisModel, AxisModelCommonMixin);
@@ -35084,7 +35084,7 @@
       }
 
       var ticks;
-      var tickCategoryInterval; // Optimize for the case that large category data and no label displayed,
+      var tickCategoryInterval; // Optimize for the case that large category-category-registry data and no label displayed,
       // we should not return all ticks.
 
       if (!tickModel.get('show') || axis.scale.isBlank()) {
@@ -35155,7 +35155,7 @@
       return result != null ? result : inner$5(axis).autoInterval = axis.calculateCategoryInterval();
     }
     /**
-     * Calculate interval for category axis ticks and labels.
+     * Calculate interval for category-category-registry axis ticks and labels.
      * To get precise result, at least one of `getRotate` and `isHorizontal`
      * should be implemented in axis.
      */
@@ -35168,7 +35168,7 @@
       var ordinalScale = axis.scale;
       var ordinalExtent = ordinalScale.getExtent(); // Providing this method is for optimization:
       // avoid generating a long array by `getTicks`
-      // in large category data case.
+      // in large category-category-registry data case.
 
       var tickCount = ordinalScale.count();
 
@@ -35187,7 +35187,7 @@
       var unitW = Math.abs(unitSpan * Math.cos(rotation));
       var unitH = Math.abs(unitSpan * Math.sin(rotation));
       var maxW = 0;
-      var maxH = 0; // Caution: Performance sensitive for large category data.
+      var maxH = 0; // Caution: Performance sensitive for large category-category-registry data.
       // Consider dataZoom, we should make appropriate step to avoid O(n) loop.
 
       for (; tickValue <= ordinalExtent[1]; tickValue += step) {
@@ -35268,7 +35268,7 @@
       } // (1) Only add min max label here but leave overlap checking
       // to render stage, which also ensure the returned list
       // suitable for splitLine and splitArea rendering.
-      // (2) Scales except category always contain min max label so
+      // (2) Scales except category-category-registry always contain min max label so
       // do not need to perform this process.
 
 
@@ -35430,7 +35430,7 @@
       /**
        * Different from `zrUtil.map(axis.getTicks(), axis.dataToCoord, axis)`,
        * `axis.getTicksCoords` considers `onBand`, which is used by
-       * `boundaryGap:true` of category axis and splitLine and splitArea.
+       * `boundaryGap:true` of category-category-registry axis and splitLine and splitArea.
        * @param opt.tickModel default: axis.model.getModel('axisTick')
        * @param opt.clamp If `true`, the first and the last
        *        tick must be at the axis end points. Otherwise, clip ticks
@@ -35513,7 +35513,7 @@
         return Math.abs(size) / len;
       };
       /**
-       * Only be called in category axis.
+       * Only be called in category-category-registry axis.
        * Can be overridden, consider other axes like in 3D.
        * @return Auto interval for cateogry axis tick and label
        */
@@ -38825,7 +38825,7 @@
 
       if (!categoryAxis) {
         return;
-      } // Note that category label interval strategy might bring some weird effect
+      } // Note that category-category-registry label interval strategy might bring some weird effect
       // in some scenario: user may wonder why some of the symbols are not
       // displayed. So we show all symbols as possible as we can.
 
@@ -38833,7 +38833,7 @@
       if (isAuto // Simplify the logic, do not determine label overlap here.
       && canShowAllSymbolForCategory(categoryAxis, data)) {
         return;
-      } // Otherwise follow the label interval strategy on category axis.
+      } // Otherwise follow the label interval strategy on category-category-registry axis.
 
 
       var categoryDataDim = data.mapDimension(categoryAxis.dim);
@@ -38848,9 +38848,9 @@
     }
 
     function canShowAllSymbolForCategory(categoryAxis, data) {
-      // In most cases, line is monotonous on category axis, and the label size
+      // In most cases, line is monotonous on category-category-registry axis, and the label size
       // is close with each other. So we check the symbol size and some of the
-      // label size alone with the category axis to estimate whether all symbol
+      // label size alone with the category-category-registry axis to estimate whether all symbol
       // can be shown without overlap.
       var axisExtent = categoryAxis.getExtent();
       var availSize = Math.abs(axisExtent[1] - axisExtent[0]) / categoryAxis.scale.count();
@@ -39158,7 +39158,7 @@
               return [points[idx * 2], points[idx * 2 + 1]];
             }
           }); // In the case data zoom triggered refreshing frequently
-          // Data may not change if line has a category axis. So it should animate nothing.
+          // Data may not change if line has a category-category-registry axis. So it should animate nothing.
 
           if (!isPointsSame(this._stackedOnPoints, stackedOnPoints) || !isPointsSame(this._points, points)) {
             if (hasAnimation) {
@@ -39969,7 +39969,7 @@
 
           if (startingAtTick) {
             each(coordSys.getAxes(), function (axis, idx) {
-              // If axis type is category, use tick coords instead
+              // If axis type is category-category-registry, use tick coords instead
               if (axis.type === 'category') {
                 var tickCoords = axis.getTicksCoords();
                 var tickIdx = coordSys.clampData(value)[idx]; // The index of rightmost tick of markArea is 1 larger than x1/y1 index
@@ -40972,7 +40972,7 @@
       if ("development" !== 'production') {
         if (realtimeSortOption) {
           if (baseAxis.type !== 'category') {
-            warn('`realtimeSort` will not work because this bar series is not based on a category axis.');
+            warn('`realtimeSort` will not work because this bar series is not based on a category-category-registry axis.');
           }
 
           if (coordSys.type !== 'cartesian2d') {
@@ -42820,7 +42820,7 @@
     var categoryAxis = merge({
       // The gap at both ends of the axis. For categoryAxis, boolean.
       boundaryGap: true,
-      // Set false to faster category collection.
+      // Set false to faster category-category-registry collection.
       deduplication: null,
       // splitArea: {
       // show: false
@@ -43019,7 +43019,7 @@
     }
 
     function getAxisType(option) {
-      // Default axis with data is category axis
+      // Default axis with data is category-category-registry axis
       return option.type || (option.data ? 'category' : 'value');
     }
 
@@ -43900,7 +43900,7 @@
         // TODO: onZero of multiple axes.
         return otherAxisOnZeroOf ? [otherAxisOnZeroOf] : [];
       }; // onZero can not be enabled in these two situations:
-      // 1. When any other axis is a category axis.
+      // 1. When any other axis is a category-category-registry axis.
       // 2. When no axis is cross 0 point.
 
 
@@ -44504,9 +44504,9 @@
             text: formattedLabel,
             align: itemLabelModel.getShallow('align', true) || labelLayout.textAlign,
             verticalAlign: itemLabelModel.getShallow('verticalAlign', true) || itemLabelModel.getShallow('baseline', true) || labelLayout.textVerticalAlign,
-            fill: isFunction(textColor) ? textColor( // (1) In category axis with data zoom, tick is not the original
+            fill: isFunction(textColor) ? textColor( // (1) In category-category-registry axis with data zoom, tick is not the original
             // index of axis.data. So tick should not be exposed to user
-            // in category axis.
+            // in category-category-registry axis.
             // (2) Compatible with previous version, which always use formatted label as
             // input. But in interval scale the formatted label is like '223,445', which
             // maked user repalce ','. So we modify it to return original val but remain
@@ -44550,7 +44550,7 @@
       var scale = axisInfo.axis.scale;
       var option = axisPointerModel.option;
       var status = axisPointerModel.get('status');
-      var value = axisPointerModel.get('value'); // Parse init value for category and time axis.
+      var value = axisPointerModel.get('value'); // Parse init value for category-category-registry and time axis.
 
       if (value != null) {
         value = scale.parse(value);
@@ -44831,7 +44831,7 @@
                 // Still show axis tick or axisLine if other axis is value / log
                 return true;
               }
-            } // Not show axisTick or axisLine if other axis is category / time
+            } // Not show axisTick or axisLine if other axis is category-category-registry / time
 
 
             return false;

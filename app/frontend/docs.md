@@ -10,6 +10,8 @@ Auth information are stored inside session for 6 hours.
 AppComponent runs a service which check every 5 minutes for expired values inside session to remove.
 # ToDo
 - Build 'anagrafica' component (datatable section, filter section, button section)
+  - Consider the parametrization of html adding title and subtitle to .ts file
+  - HTML should be the same and should only change the .ts with specific params.
 - Create config file to set time param for login inside project or read it from backend
 - Clean project from useless component
 - Introduce roles for permission

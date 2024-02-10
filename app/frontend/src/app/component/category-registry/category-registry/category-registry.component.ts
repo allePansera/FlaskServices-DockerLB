@@ -1,26 +1,25 @@
-import {Component, Input} from '@angular/core';
+import { Component } from '@angular/core';
 import {IDatasource, IServerSideGetRowsParams, GridOptions} from 'ag-grid-community';
-import {UserService} from "../../services/user/user.service";
+import {CategoryService} from "../../../services/category/category.service";
 
 @Component({
-  selector: 'app-user-category-registry',
-  templateUrl: './user-registry.component.html',
-  styleUrls: ['./user-registry.component.css']
+  selector: 'app-category-category-registry',
+  templateUrl: './category-registry.component.html',
+  styleUrls: ['./category-registry.component.css']
 })
 
-export class UserRegistryComponent {
+export class CategoryRegistryComponent {
   gridApi: any;
   gridColumnApi: any;
   gridOptions: any;
   columnDefs: any[];
   rowData: any[];
 
-  constructor(private userService: UserService) {
+  constructor(private categoryService: CategoryService) {
     // Replace with specific field returned from HTML
     this.columnDefs = [
-      { headerName: 'User ID', field: 'user__id', sortable: true, filter: true },
-      { headerName: 'User Name', field: 'username', sortable: true, filter: true },
-      { headerName: 'User Role', field: 'userrole', sortable: true, filter: true }
+      { headerName: 'Category ID', field: 'cate__id', sortable: true, filter: true },
+      { headerName: 'Category Name', field: 'catename', sortable: true, filter: true }
     ];
     // Data table structure
     this.gridOptions = {
@@ -35,7 +34,7 @@ export class UserRegistryComponent {
     this.gridColumnApi = params.columnApi;
     // Set col width dynamically
     params.api.sizeColumnsToFit();
-    this.userService.getUsersRegistry().subscribe(data => {
+    this.categoryService.getCategories().subscribe(data => {
       this.rowData = data;
     });
   }

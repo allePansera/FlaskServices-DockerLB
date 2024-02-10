@@ -5,7 +5,6 @@ import {AppRoutingModule} from './app-routing.module';
 // Components
 import {AppComponent} from './app.component';
 import {SidebarComponent} from './component/sidebar/sidebar.component';
-import {AnagraficaBaseComponent} from './component/anagrafica-base-NOTUSED/anagrafica-base.component';
 import {SearchbarComponent} from './component/searchbar/searchbar.component';
 // External Moduls
 import {SweetAlert2Module} from '@sweetalert2/ngx-sweetalert2';
@@ -17,18 +16,21 @@ import { UserRegistryComponent } from './component/user-registry/user-registry.c
 import { LoginComponent } from './component/login/login.component';
 import { FilterSectionComponent } from './component/composable/filter-section/filter-section.component';
 import { DatatableSectionComponent } from './component/composable/datatable-section/datatable-section.component';
+import { ProductRegistryComponent } from './component/product-registry/product-registry/product-registry.component';
+import {CategoryRegistryComponent} from './component/category-registry/category-registry/category-registry.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SidebarComponent,
-    AnagraficaBaseComponent,
     SearchbarComponent,
     HomepageComponent,
     UserRegistryComponent,
     LoginComponent,
     FilterSectionComponent,
-    DatatableSectionComponent
+    DatatableSectionComponent,
+    ProductRegistryComponent,
+    CategoryRegistryComponent
   ],
   imports: [
     BrowserModule,

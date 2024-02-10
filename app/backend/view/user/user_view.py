@@ -24,7 +24,7 @@ def list_login():
 @flask_login.login_required
 def list_registry():
     """
-    Endpoint used to populate user registry
+    Endpoint used to populate user category-registry
     :return: list of username, id and role
     """
     user_manager = UserManager()

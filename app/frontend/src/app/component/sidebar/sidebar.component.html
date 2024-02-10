@@ -3,7 +3,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link " href="/homePage">
+      <a class="nav-link " href="/">
         <i class="bi bi-grid"></i>
         <span>Home Page</span>
       </a>
@@ -16,7 +16,7 @@
     <ul id="anagrafiche" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li class="nav-item">
         <div *ngFor="let anag of anagrafiche">
-          <a [routerLink]="'/anagrafica_base' + anag.url">
+          <a [routerLink]="'/registry/' + anag.url">
             <i class="bi {{ anag.icon }}"></i><span>{{anag.name}}</span>
           </a>
 

@@ -5,13 +5,13 @@
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="user__id">User ID:</label>
-      <select id="user__id" formControlName="user__id" >
+      <select id="user__id" name="user__id" formControlName="user__id" >
         <option *ngFor="let user of users" [value]="user.user__id">{{ user.username }}</option>
       </select>
     </div>
     <div class="form-group">
       <label for="user_pwd">Password:</label>
-      <input type="password" id="user_pwd" formControlName="user_pwd">
+      <input type="password" name="user_pwd" id="user_pwd" formControlName="user_pwd">
     </div>
     <button type="submit">Login</button>
   </form>

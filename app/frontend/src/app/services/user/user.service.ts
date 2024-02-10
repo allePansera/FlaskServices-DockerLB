@@ -9,7 +9,7 @@ import {Observable} from "rxjs";
 export class UserService {
 
   private user_login_list = 'api/user/list/login';
-  private user_registry_list = 'api/user/list/registry';
+  private user_registry_list = 'api/user/list/category-registry';
 
   constructor(private http: HttpClient) { }
 

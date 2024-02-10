@@ -27,6 +27,9 @@ To implements, used to check for data_manager functionalities.
 ## Logging
 Build granular logging system with frequent zip archive building per day
 # ToDo
+- Create API for all registry: listing all possible data for 
+datatable given father table and sons
 - Tests implementation
 - Log implementation
 - Params for session inside db with related view for angular setup
+- Before edit on registry check for all related dependencies
