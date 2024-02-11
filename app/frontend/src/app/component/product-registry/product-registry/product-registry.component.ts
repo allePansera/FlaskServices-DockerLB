@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {IDatasource, IServerSideGetRowsParams, GridOptions} from 'ag-grid-community';
+import {IDatasource, IServerSideGetRowsParams, GridOptions, IServerSideDatasource} from 'ag-grid-community';
 import {ProductService} from "../../../services/product/product.service";
 
 
@@ -9,7 +9,7 @@ import {ProductService} from "../../../services/product/product.service";
   styleUrls: ['./product-registry.component.css']
 })
 
-export class ProductRegistryComponent {
+export class ProductRegistryComponent{
   gridApi: any;
   gridColumnApi: any;
   gridOptions: any;
@@ -28,7 +28,9 @@ export class ProductRegistryComponent {
     this.gridOptions = {
       domLayout: 'autoHeight',
       autoHeight: true,
-      rowSelection: 'single'
+      rowSelection: 'single',
+      rowModelType: 'serverSide',
+      serverSideDatasource: this.productService.getProductsPagination()
     };
   }
 
@@ -37,9 +39,6 @@ export class ProductRegistryComponent {
     this.gridColumnApi = params.columnApi;
     // Set col width dynamically
     params.api.sizeColumnsToFit();
-    this.productService.getProductsPagination().subscribe(data => {
-      this.rowData = data;
-    });
   }
 
   onSelectionChanged(event: any) {
@@ -51,5 +50,4 @@ export class ProductRegistryComponent {
     const selectedCell = this.gridApi.getSelectedNodes();
     console.log("Selected cell:", selectedCell);
   }
-
 }

@@ -8,10 +8,24 @@ class ProductManager:
     def __init__(self):
         pass
 
-    def get_products(self, exclude_keys=[]):
+    def get_products_len(self):
         """
-        Used to list all existing product
+        Method related to pagination for total rows param handling
+        :return: integer value representing total number of instances
+        """
+        query_select = """SELECT COUNT(*) FROM products"""
+        db_connection = SQLiteDBManager()
+        db_connection.connect()
+        rows = db_connection.fetch_all(query_select, json=False)
+        db_connection.disconnect()
+        return int(rows[0][0])
+
+    def get_products_pagination(self, exclude_keys=[], start_row=0, end_row=100):
+        """
+        Used to list all existing product.
+        This method is built for pagination, it's mandatory to keep track of stat row and end row.
         :param exclude_keys: list of keys to remove from output's dictionaries
+        :
         :return: [
         {
           "prod__id": "Sedia",
@@ -24,10 +38,14 @@ class ProductManager:
         query_select = """
         SELECT 
         prod__id, prodname, proddesc, prodcate
-        FROM products"""
+        FROM products
+        LIMIT :%s - :%s 
+        OFFSET :%s
+        """
+        param_select = (end_row, start_row, start_row)
         db_connection = SQLiteDBManager()
         db_connection.connect()
-        rows = db_connection.fetch_all(query_select, json=True)
+        rows = db_connection.fetch_all(query_select, params=param_select, json=True)
         db_connection.disconnect()
         for inner_dict in rows:
             for key in exclude_keys:
