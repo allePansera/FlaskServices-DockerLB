@@ -9,6 +9,7 @@ The auth system is based on guard. Each route is activated only if guard permits
 Auth information are stored inside session for 6 hours. 
 AppComponent runs a service which check every 5 minutes for expired values inside session to remove.
 # ToDo
+- Think about adding the possibility of writing a new dependency (category inside product) without the constraint of a previous 'insert' operation inside category registry.
 - Add https://medium.com/hardwareandro/angular-server-side-paged-datatable-8f585fd43f41 for datatable whose require pagination
 - Build 'anagrafica' component (datatable section, filter section, button section)
   - Consider the parametrization of html adding title and subtitle to .ts file
