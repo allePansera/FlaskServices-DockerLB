@@ -1,53 +1,35 @@
-import {Component, Input} from '@angular/core';
-import {IDatasource, IServerSideGetRowsParams, GridOptions, IServerSideDatasource} from 'ag-grid-community';
+import {Component, Inject} from '@angular/core';
+import {DatatableSectionComponent} from "../../composable/datatable-section/datatable-section.component";
 import {ProductService} from "../../../services/product/product.service";
+import {PaginationService} from "../../composable/datatable-section/pagination-service-abs";
 
 
 @Component({
   selector: 'app-product-category-registry',
   templateUrl: './product-registry.component.html',
-  styleUrls: ['./product-registry.component.css']
+  styleUrls: ['./product-registry.component.css'],
 })
 
 export class ProductRegistryComponent{
-  gridApi: any;
-  gridColumnApi: any;
-  gridOptions: any;
-  columnDefs: any[];
-  rowData: any[];
+
+  datatatableColumnDefs: any[] = [];
+  datatatableButtons: string[] = [];
+  datatatableSelection: string;
+  datatablePaginationService: PaginationService;
+
 
   constructor(private productService: ProductService) {
-    // Replace with specific field returned from HTML
-    this.columnDefs = [
-      { headerName: 'Product ID', field: 'prod__id', sortable: true, filter: true },
-      { headerName: 'Product Name', field: 'prodname', sortable: true, filter: true },
-      { headerName: 'Product Description', field: 'proddesc', sortable: true, filter: true },
-      { headerName: 'Product Category', field: 'prodcate', sortable: true, filter: true }
+
+    // Init DataTable properties
+    this.datatatableColumnDefs = [
+      { data: 'prod__id', name: 'prod__id', sortable: true, filter: true, description: "Product ID"},
+      { data: 'prodname', name: 'prodname', sortable: true, filter: true, description: "Product Name"},
+      { data: 'proddesc', name: 'proddesc', sortable: true, filter: true, description: "Product Description"},
+      { data: 'prodcate', name: 'prodcate', sortable: true, filter: true, description: "Product Category"}
     ];
-    // Data table structure
-    this.gridOptions = {
-      domLayout: 'autoHeight',
-      autoHeight: true,
-      rowSelection: 'single',
-      rowModelType: 'serverSide',
-      serverSideDatasource: this.productService.getProductsPagination()
-    };
+    this.datatatableButtons = ["excel"];
+    this.datatatableSelection = "single";
+    this.datatablePaginationService = this.productService as PaginationService;
   }
 
-  onGridReady(params: any) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    // Set col width dynamically
-    params.api.sizeColumnsToFit();
-  }
-
-  onSelectionChanged(event: any) {
-    const selectedRows = this.gridApi.getSelectedRows();
-    console.log("Selected row: ", selectedRows);
-  }
-
-  onCellClicked(event: any){
-    const selectedCell = this.gridApi.getSelectedNodes();
-    console.log("Selected cell:", selectedCell);
-  }
 }

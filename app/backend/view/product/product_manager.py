@@ -10,7 +10,8 @@ class ProductManager:
 
     def get_products_len(self):
         """
-        Method related to pagination for total rows param handling
+        Method related to pagination for total rows param handling.
+        TODO: optimize this method considering the usage of index or checking table properties
         :return: integer value representing total number of instances
         """
         query_select = """SELECT COUNT(*) FROM products"""
@@ -20,7 +21,7 @@ class ProductManager:
         db_connection.disconnect()
         return int(rows[0][0])
 
-    def get_products_pagination(self, exclude_keys=[], start_row=0, end_row=100):
+    def get_products_pagination(self, exclude_keys=[], limit=100, offset=0):
         """
         Used to list all existing product.
         This method is built for pagination, it's mandatory to keep track of stat row and end row.
@@ -35,17 +36,15 @@ class ProductManager:
         }
         , ...]
         """
-        query_select = """
+        query_select = f"""
         SELECT 
         prod__id, prodname, proddesc, prodcate
         FROM products
-        LIMIT :%s - :%s 
-        OFFSET :%s
+        LIMIT {limit} OFFSET {offset}
         """
-        param_select = (end_row, start_row, start_row)
         db_connection = SQLiteDBManager()
         db_connection.connect()
-        rows = db_connection.fetch_all(query_select, params=param_select, json=True)
+        rows = db_connection.fetch_all(query_select, json=True)
         db_connection.disconnect()
         for inner_dict in rows:
             for key in exclude_keys:

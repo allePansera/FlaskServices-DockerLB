@@ -1,0 +1,10 @@
+<!-- DataTables section -->
+<div class="container">
+  <table datatable [dtOptions]="dtOptions" class="row-border hover">
+    <thead>
+      <tr>
+        <th *ngFor="let col of columnDefs">{{ col.description }}</th>
+      </tr>
+    </thead>
+  </table>
+</div>

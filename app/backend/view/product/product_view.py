@@ -12,18 +12,31 @@ def list_products():
     """
     Endpoint used to populate datatable.
     Args required:
-    - start_row: starting row for pagination
-    - end_row: ending row for pagination
+    - limit: limit to use for paginated requests
+    - offset: offset to use for paginated requests
+    - like_index: list of indexes to use for text research, empty list if not used
+    - like_search: text research value, leave empty string if not used
+    - sorting_col: col used for sorting, default index is 0 (it's supposed to be an ID)
+    - sorting_direction: sorting direction for specified col, default is 'asc'
+    FILTERS REGARDING CONTENT OR SORTING ARE CURRENTLY NOT IMPLEMENTED!
     :return:
     """
-    start_row = int(request.args.get('startRow', 0))
-    end_row = int(request.args.get('endRow', 10))
+    limit = int(request.args.get("limit", 10))
+    offset = int(request.args.get("offset", 0))
+    like_index = request.args.getlist('like_index')
+    like_search = request.args.get("like_search", "")
+    sorting_col = int(request.args.get("sorting_col", 0))
+    sorting_direction = request.args.get("sorting_direction", "asc")
     products_manager = ProductManager()
-    output = products_manager.get_products_pagination(start_row=start_row, end_row=end_row)
+    output = products_manager.get_products_pagination(limit=limit, offset=offset)
     rows = products_manager.get_products_len()
+    # TODO define row filtered
+    # TODO handle like and sorting params
+    # TODO add from front-end 'where' param for specific search
     return jsonify({
         'rowData': output,
-        'rowCount': rows
+        'rowCount': rows,
+        'rowFilteredRecords': 100
     }), 200
 
 

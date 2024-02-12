@@ -20,19 +20,13 @@
             <h5 class="mb-0 card-title">Product registry</h5>
           </div>
         </div>
-        <!-- Ag grid section -->
-        <div>
-          <ag-grid-angular
-            class="ag-theme-alpine"
-            [gridOptions]="gridOptions"
-            [columnDefs]="columnDefs"
-            [rowData]="rowData"
-            (gridReady)="onGridReady($event)"
-            (selectionChanged)="onSelectionChanged($event)"
-            (cellClicked)="onCellClicked($event)"
-          >
-          </ag-grid-angular>
-        </div>
+        <!-- Datatables section, define here @Input -->
+        <app-datatable-section
+          [columnDefs]="datatatableColumnDefs"
+          [paginationService]="datatablePaginationService"
+          [buttons]="datatatableButtons"
+          [selection]="datatatableSelection">
+        </app-datatable-section>
         <!-- Close page -->
         <a href="/" class="btn btn-secondary">Chiudi</a>
       </div>

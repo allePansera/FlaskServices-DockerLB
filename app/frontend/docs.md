@@ -18,3 +18,4 @@ AppComponent runs a service which check every 5 minutes for expired values insid
 - Clean project from useless component
 - Introduce roles for permission
 - Read from server default configuration and store them inside app component (such as session expiration time)
+- Remove any datatypes and add specific types

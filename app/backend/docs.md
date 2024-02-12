@@ -33,4 +33,5 @@ datatable given father table and sons
 - Log implementation
 - Params for session inside db with related view for angular setup
 - Before edit on registry check for all related dependencies
-- Create table for denormalized counters considering huge tables whose require total rows.
+- Create table for denormalized counters considering huge tables whose require total rows. (Select table_rows from information_schema.tables where table_name='TABLE_NAME')
+- Add traffic logger to check for endpoint usage

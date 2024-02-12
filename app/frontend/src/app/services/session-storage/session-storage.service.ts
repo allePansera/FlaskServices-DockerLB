@@ -34,7 +34,9 @@ export class SessionStorageService {
   }
 
   getItem(key: string): any{
-    return sessionStorage.getItem(key);
+    const item_encoded = sessionStorage.getItem(key);
+    if(item_encoded==null) return null;
+    else return JSON.parse(item_encoded)["value"];
   }
 
   removeItem(key: string){
