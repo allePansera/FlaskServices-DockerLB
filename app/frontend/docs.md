@@ -10,12 +10,13 @@ Auth information are stored inside session for 6 hours.
 AppComponent runs a service which check every 5 minutes for expired values inside session to remove.
 # ToDo
 - Think about adding the possibility of writing a new dependency (category inside product) without the constraint of a previous 'insert' operation inside category registry.
-- Add https://medium.com/hardwareandro/angular-server-side-paged-datatable-8f585fd43f41 for datatable whose require pagination
-- Build 'anagrafica' component (datatable section, filter section, button section)
+- Build 'anagrafica' component 
   - Consider the parametrization of html adding title and subtitle to .ts file
   - HTML should be the same and should only change the .ts with specific params.
+  - Consider adding buttons and modal integration
 - Create config file to set time param for login inside project or read it from backend
-- Clean project from useless component
+- Clean project from useless component, check for comment
+- Clean vars, write them as 'prefixName' style (firstName, invoiceNumber, ...)
 - Introduce roles for permission
 - Read from server default configuration and store them inside app component (such as session expiration time)
 - Remove any datatypes and add specific types
