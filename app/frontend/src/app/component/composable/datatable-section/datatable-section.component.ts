@@ -15,20 +15,7 @@ export class DatatableSectionComponent {
   @Input() selection: string = "single";
   dtOptions: any;
 
-
-
   constructor() { }
-
-  /* @Inject(PAGINATION_SERVICE_TOKEN)
-  setProp(paginationService: PaginationService, columnDefs: any, selection: string = "single", buttons: string[] = []){
-
-    TODO: Create a class to pass to the constructor in order to reduce method signature. The same for pagination service
-
-    this.columnDefs = columnDefs;
-    this.paginationService = paginationService;
-    this.selection = selection;
-    this.buttons = buttons;
-  }*/
 
   ngOnInit(){
     this.dtOptions = {
