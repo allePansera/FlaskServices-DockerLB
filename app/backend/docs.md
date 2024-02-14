@@ -28,7 +28,8 @@ To implements, used to check for data_manager functionalities.
 Build granular logging system with frequent zip archive building per day
 # ToDo
 - Create API for all registry: listing all possible data for 
-datatable given father table and sons
+datatable given father table and sons. Check with MySQL to use a specific query as procedure. 
+Keep in mind: use a .sql script as basis for extraction.
 - Tests implementation
 - Log implementation
 - Params for session inside db with related view for angular setup
