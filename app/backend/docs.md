@@ -31,7 +31,7 @@ Build granular logging system with frequent zip archive building per day
 datatable given father table and sons. Check with MySQL to use a specific query as procedure. 
 Keep in mind: use a .sql script as basis for extraction.
 - Tests implementation
-- Log implementation
+- Log implementation: https://logit.io/blog/post/open-source-logging-tools/
 - Params for session inside db with related view for angular setup
 - Before edit on registry check for all related dependencies
 - Create table for denormalized counters considering huge tables whose require total rows. (Select table_rows from information_schema.tables where table_name='TABLE_NAME')
