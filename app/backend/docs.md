@@ -1,6 +1,6 @@
-# Frontend docs
+# Backend docs
 ## General
-Front-end content is made of the following element:
+Backend-end content is made of the following element:
 1) config: contains config parameter, for example project required libs; 
 2) db: contains sql lite (TEMPORARY) and related class for connection;
 3) static: not used at the moment, keep it there 4 flask structure;

@@ -3,7 +3,15 @@ import sys
 
 
 PORT = 80
-if len(sys.argv) == 2:
+# Supported ["dev", "release"]
+DEBUG = True
+if len(sys.argv) == 3:
     PORT = int(sys.argv[1])
+    DEBUG = sys.argv[2]
+    if DEBUG not in ["dev", "release"]:
+        raise Exception(f"Running mode '{DEBUG}' not supported")
 
-app.run(host="0.0.0.0", debug=True, port=PORT)
+    if DEBUG == "dev": DEBUG = True
+    elif DEBUG == "release": DEBUG = False
+
+app.run(host="0.0.0.0", debug=DEBUG, port=PORT)

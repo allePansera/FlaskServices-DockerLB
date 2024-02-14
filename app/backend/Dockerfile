@@ -10,4 +10,4 @@ COPY .. /app
 RUN pip install requests
 RUN pip install -r config/requirements.txt
 # execute flask app
-CMD python run.py 5000
+CMD python run.py 5000 release
