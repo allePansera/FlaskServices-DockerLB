@@ -24,6 +24,13 @@ export class AuthService {
     this.username = this.session.getItem('username');
   }
 
+  /**
+   * Function calls backend API req_api_login and checks users credentials.
+   * It's called by onSubmit() of login page form.
+   * @param user__id
+   * @param username
+   * @param user_pwd
+   */
   login(user__id: string, username: string, user_pwd: string): Observable<any> {
     // Build HTTP request payload
     const userData = {

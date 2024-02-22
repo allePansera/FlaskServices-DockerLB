@@ -5,8 +5,13 @@ import {Injectable} from "@angular/core";
 @Injectable({
   providedIn: 'root'
 })
-
 export class AuthPolicyGuard{
+  /**
+   * Retrieves whether or not an user is authorized to access a page. Therefore returns true/false.
+   * To do so uses AuthService which calls necessary API.
+   * @param authService used to access API for verifing if user is authenticated.
+   * @param router used for redirecting unauthorized users to /login page.
+   */
   constructor(private authService: AuthService, private router: Router) {}
 
   canActivate(): boolean {

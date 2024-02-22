@@ -15,7 +15,7 @@
     </a>
     <ul id="anagrafiche" class="nav-content collapse " data-bs-parent="#sidebar-nav">
       <li class="nav-item">
-        <div *ngFor="let anag of anagrafiche">
+        <div *ngFor="let anag of registry">
           <a [routerLink]="'/registry/' + anag.url">
             <i class="bi {{ anag.icon }}"></i><span>{{anag.name}}</span>
           </a>

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {anagrafiche, Anagrafiche} from "../utils/anagrafiche";
+import {registry, Registry} from "../utils/registry";
 
 @Component({
   selector: 'app-searchbar',
@@ -7,7 +7,7 @@ import {anagrafiche, Anagrafiche} from "../utils/anagrafiche";
   styleUrls: ['./searchbar.component.css']
 })
 export class SearchbarComponent {
-  anagrafiche = [...anagrafiche]
+  anagrafiche = [...registry]
 
   /**
    * The class is used to show or hide (toggle) sidebar.

@@ -1,10 +1,10 @@
-export interface Anagrafiche {
+export interface Registry {
   name: string;
   icon: string;
   url: string;
 }
 
-export const anagrafiche = [
+export const registry = [
   {
     name: 'User registry',
     icon: 'bi-circle',

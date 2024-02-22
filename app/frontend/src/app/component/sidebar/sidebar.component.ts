@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import {anagrafiche} from '../utils/anagrafiche';
+import {registry} from '../utils/registry';
 
 @Component({
   selector: 'app-sidebar',
@@ -8,5 +8,5 @@ import {anagrafiche} from '../utils/anagrafiche';
   styleUrls: ['./sidebar.component.css'],
 })
 export class SidebarComponent {
-  anagrafiche = [...anagrafiche];
+  registry = [...registry];
 }
