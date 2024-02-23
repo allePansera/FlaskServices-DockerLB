@@ -20,3 +20,6 @@ AppComponent runs a service which check every 5 minutes for expired values insid
 - Introduce roles for permission
 - Read from server default configuration and store them inside app component (such as session expiration time)
 - Remove any datatypes and add specific types
+- Possibility to have input with dynamic hints (eg tyiping "Mat" in name field shows a list of name like Mattia, Matteo, …)
+- Possibility to search&find in form
+- implement Angular Material
