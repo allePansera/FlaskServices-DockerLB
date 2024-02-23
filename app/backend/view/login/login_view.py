@@ -12,6 +12,7 @@ from app import SESSION_EXPRIANCE_MIN
 from view.user.user_manager import UserManager
 import flask_login
 import json
+import traceback
 
 
 LOGIN_SUCCESSFULLY = "Login attempted correctly"
@@ -80,7 +81,7 @@ def auth():
         else:
             return jsonify(message=LOGIN_FAILED), 401
     except Exception as e:
-        return jsonify(message=str(e)), 503
+        return jsonify(message=str(traceback.print_exc())), 503
 
 
 @login.route('/logout', methods=["POST"])
@@ -97,4 +98,4 @@ def logout():
         else:
             return jsonify(message=LOGOUT_FAILED), 401
     except Exception as e:
-        return jsonify(message=str(e)), 503
+        return jsonify(message=str(traceback.print_exc())), 503
