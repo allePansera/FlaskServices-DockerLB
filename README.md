@@ -6,7 +6,7 @@ Segue una breve guida al deploy dell'architettura ideata sia per lo sviluppo che
 1) Download latest node lts version, at least 18.13
 2) Clone repo and move inside 'app/frontend' directory
 3) Run npm install
-4) Run npm build (credo ci sia un errore: **ng** build, oppure npm run build)
+4) **ng** build, oppure npm run build
 5) Run ng serve --proxy-config proxy.conf.json
 6) Check the result at: http://localhost:4200
 ### Back-End
