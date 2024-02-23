@@ -1,0 +1,12 @@
+{
+  "modes": {
+    "dev": {
+      "execution_parameter": "dev",
+      "database_filename": "db/connection_param/dev.json"
+    },
+    "release": {
+      "execution_parameter": "release",
+      "database_filename": "db/connection_param/release.json"
+    }
+  }
+}
