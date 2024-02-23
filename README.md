@@ -15,7 +15,7 @@ Segue una breve guida al deploy dell'architettura ideata sia per lo sviluppo che
 3) Execute the following commands:
    1) pip install requests 
    2) pip install -r config/requirements.txt
-4) Execute python run.py 80 or configure pycharm env to run app.py
+4) Execute python run.py 80 dev or configure pycharm env to run app.py
 ## Production
 Move inside /app directory and execute the following command:
 <br>

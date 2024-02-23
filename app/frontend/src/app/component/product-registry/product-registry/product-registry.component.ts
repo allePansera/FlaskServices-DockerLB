@@ -9,9 +9,10 @@ import {PaginationService} from "../../composable/datatable-section/pagination-s
   templateUrl: './product-registry.component.html',
   styleUrls: ['./product-registry.component.css'],
 })
-
-export class ProductRegistryComponent{
-
+export class ProductRegistryComponent {
+  /**
+   * Class extends PaginationService which is used to populate DataTable using Pagination.
+   */
   datatatableColumnDefs: any[] = [];
   datatatableButtons: string[] = [];
   datatatableSelection: string;
@@ -19,13 +20,12 @@ export class ProductRegistryComponent{
 
 
   constructor(private productService: ProductService) {
-
     // Init DataTable properties
     this.datatatableColumnDefs = [
-      { data: 'prod__id', name: 'prod__id', sortable: true, filter: true, description: "Product ID"},
-      { data: 'prodname', name: 'prodname', sortable: true, filter: true, description: "Product Name"},
-      { data: 'proddesc', name: 'proddesc', sortable: true, filter: true, description: "Product Description"},
-      { data: 'prodcate', name: 'prodcate', sortable: true, filter: true, description: "Product Category"}
+      {data: 'prod__id', name: 'prod__id', sortable: true, filter: true, description: "Product ID"},
+      {data: 'prodname', name: 'prodname', sortable: true, filter: true, description: "Product Name"},
+      {data: 'proddesc', name: 'proddesc', sortable: true, filter: true, description: "Product Description"},
+      {data: 'prodcate', name: 'prodcate', sortable: true, filter: true, description: "Product Category"}
     ];
     this.datatatableButtons = ["excel"];
     this.datatatableSelection = "single";

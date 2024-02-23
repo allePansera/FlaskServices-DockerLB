@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {IDatasource, IServerSideGetRowsParams, GridOptions} from 'ag-grid-community';
 import {UserService} from "../../services/user/user.service";
+import {PaginationService} from "../composable/datatable-section/pagination-service-abs";
 
 @Component({
   selector: 'app-user-category-registry',
@@ -9,45 +9,28 @@ import {UserService} from "../../services/user/user.service";
 })
 
 export class UserRegistryComponent {
-  gridApi: any;
-  gridColumnApi: any;
-  gridOptions: any;
-  columnDefs: any[];
-  rowData: any[];
+  datatablesColumnDefs: any[] = [];
+  datatableButtons: any[] = [];
+  datatableSelection: string;
+  datatablePaginationService: PaginationService;
 
   constructor(private userService: UserService) {
-    // Replace with specific field returned from HTML
-    this.columnDefs = [
-      { headerName: 'User ID', field: 'user__id', sortable: true, filter: true },
-      { headerName: 'User Name', field: 'username', sortable: true, filter: true },
-      { headerName: 'User Role', field: 'userrole', sortable: true, filter: true }
-    ];
-    // Data table structure
-    this.gridOptions = {
-      domLayout: 'autoHeight',
-      autoHeight: true,
-      rowSelection: 'single'
-    };
+    this.datatablesColumnDefs = [
+      {data: 'user__id', name: 'user__id', sortable: true, filter: true, description: 'User ID'},
+      {data: 'username', name: 'username', sortable: true, filter: true, description: 'User Name'},
+      {data: 'userrole', name: 'userrole', sortable: true, filter: true, description: 'User Role'},
+    ]
+    this.datatableSelection = 'single';
+    this.datatableButtons = [
+      {
+        text: '<i class="tf-icons bx bx-user-plus"></i>', // bx-add-to-queue
+        titleAttr: 'nuovo',
+        className: 'btn-primary',
+        action: function (e: any, dt: any, node: any, config: any) {
+          console.log('pressed');
+        }
+      },
+    ]
+    this.datatablePaginationService = this.userService as PaginationService;
   }
-
-  onGridReady(params: any) {
-    this.gridApi = params.api;
-    this.gridColumnApi = params.columnApi;
-    // Set col width dynamically
-    params.api.sizeColumnsToFit();
-    this.userService.getUsersRegistry().subscribe(data => {
-      this.rowData = data;
-    });
-  }
-
-  onSelectionChanged(event: any) {
-    const selectedRows = this.gridApi.getSelectedRows();
-    console.log("Selected row: ", selectedRows);
-  }
-
-  onCellClicked(event: any){
-    const selectedCell = this.gridApi.getSelectedNodes();
-    console.log("Selected cell:", selectedCell);
-  }
-
 }
